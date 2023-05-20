@@ -28,7 +28,7 @@ public class Calendar {
 		appointments.add(appointment);
 	}
 	
-	public void cancel(Appointment appointment) throws NonexistingAppointmentException {
+	public void cancel(Appointment appointment) throws Exception {
 
 		if (appointments.contains(appointment)){
 			appointments.remove(appointment);
@@ -40,8 +40,9 @@ public class Calendar {
 	
 	public List<Appointment> filterDay(Date day) {
 		List<Appointment> res = new ArrayList<>();
+		
 		for(Appointment ap : appointments) {
-			if(ap.getAppointmentDate().compareTo(day) == 0) {
+			if (this.isSameDay(day, ap.getAppointmentDate())) {
 				res.add(ap);
 			}
 		}
@@ -58,4 +59,19 @@ public class Calendar {
 		}
 		return false;
 	}
+	
+	private boolean isSameDay(Date date1, Date date2) {
+        // Cria instancias do java.util.Calendar
+        java.util.Calendar cal1 = java.util.Calendar.getInstance();
+        java.util.Calendar cal2 = java.util.Calendar.getInstance();
+
+        // Define as datas nos calendarios
+        cal1.setTime(date1);
+        cal2.setTime(date2);
+
+        // Compara ano, mes e dia
+        return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
+                cal1.get(java.util.Calendar.MONTH) == cal2.get(java.util.Calendar.MONTH) &&
+                cal1.get(java.util.Calendar.DAY_OF_MONTH) == cal2.get(java.util.Calendar.DAY_OF_MONTH);
+    }
 }

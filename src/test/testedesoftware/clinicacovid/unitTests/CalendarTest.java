@@ -1,5 +1,6 @@
 package test.testedesoftware.clinicacovid.unitTests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -102,6 +103,57 @@ public class CalendarTest {
 		Assertions.assertThrows(NonexistingAppointmentException.class, () -> {
 			calendar.cancel(appointment);
 		});		
+	}
+	
+
+	@Test
+	void testFilterByDayEmpty() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Patient patient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
+		
+		calendar.schedule(new Appointment(today, patient));
+		
+		assertFalse(calendar.filterDay(today).isEmpty());
+		assertTrue(calendar.filterDay(tomorrow).isEmpty());
+	}
+	
+	@Test
+	void testFilterByDayAtDifferentDays() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Patient patient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
+		Appointment appointmentToday = new Appointment(today, patient);
+		Appointment appointmentTomorrow = new Appointment(tomorrow, patient);
+				
+		calendar.schedule(appointmentToday);
+		calendar.schedule(appointmentTomorrow);
+		
+		assertEquals(calendar.filterDay(today).size(), 1);
+		assertTrue(calendar.filterDay(today).contains(appointmentToday));
+		assertEquals(calendar.filterDay(tomorrow).size(), 1);
+		assertTrue(calendar.filterDay(tomorrow).contains(appointmentTomorrow));
+	}
+	
+	@Test
+	void testFilterByDayWithDifferentHours() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Patient patient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		
+		java.util.Calendar c = java.util.Calendar.getInstance();		
+		c.setTime(new Date());
+		c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+		
+        c.set(java.util.Calendar.HOUR_OF_DAY, 10);        
+        Date date1 = c.getTime();        
+        
+        c.set(java.util.Calendar.HOUR_OF_DAY, 11);
+        Date date2 = c.getTime();
+
+		calendar.schedule(new Appointment(date1, patient));
+		calendar.schedule(new Appointment(date2, patient));
+		
+		assertEquals(calendar.filterDay(date1).size(), 2);
+		assertEquals(calendar.filterDay(date2).size(), 2);
 	}
 	
 }
