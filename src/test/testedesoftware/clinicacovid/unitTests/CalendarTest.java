@@ -24,7 +24,7 @@ public class CalendarTest {
 	
 	@BeforeEach
 	void setUp() {
-		calendar = new Calendar(); 
+		calendar = new Calendar();
 	}
 	
 	@Test
@@ -154,6 +154,41 @@ public class CalendarTest {
 		
 		assertEquals(calendar.filterDay(date1).size(), 2);
 		assertEquals(calendar.filterDay(date2).size(), 2);
+	}
+	
+	
+	@Test
+	void testBusyAtWithEmptyAppointments() {		
+		assertTrue(calendar.getAppointments().isEmpty());
+		assertFalse(calendar.busyAt(new Date()));		
+	}
+	
+	@Test
+	void testBusyAtAvailableDate() {	
+	}
+	
+	@Test
+	void testBusyAtUnavailableDate() {	
+	}
+	
+	@Test
+	void testFilterByPatient() {
+
+	}
+	
+	@Test
+	void testClearSchedule() {
+		
+	}
+	
+	@Test
+	void testCancelAppointsAtDate() {
+		
+	}
+	
+	@Test 
+	void testCancelAppointmentsByPatient() {
+		
 	}
 	
 }
