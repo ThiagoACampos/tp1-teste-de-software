@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class IntegrationTests {
 	    patient = new Patient("José",  20, "jose@gmail.com", "31999999999", "jose");
 	    doctor = new Doctor("AB1234", "Roberto", "roberto");
 	    storage = new Storage();
+	    storage.setSize(50);
+	    storage.setEquipmentsAllowedToStore(Arrays.asList("Máscara Descartável","Teste Covid","Álcool em gel"));
 	    storage.addEquipment(new Equipment("Máscara Descartável", 4, true));
 	    storage.addEquipment(new Equipment("Teste Covid", 20, true));
 	    storage.addEquipment(new Equipment("Álcool em gel", 10, true));
