@@ -20,7 +20,7 @@ public class Main {
 	private static PatientController patientController;
 	private static DoctorController doctorController;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		controller = new DataController();
 		in = new Scanner(System.in);
 		

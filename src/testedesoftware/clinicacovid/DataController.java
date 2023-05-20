@@ -1,6 +1,7 @@
 package testedesoftware.clinicacovid;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DataController {
 	private List<Nurse> nurses = new ArrayList<>();
 	private List<Patient> patients = new ArrayList<>();
 	
-	public DataController() {
+	public DataController() throws Exception{
 		// Initialize initial data
 		// TODO: Fetch from the database
 		
@@ -58,6 +59,8 @@ public class DataController {
 		patients.add(p5);
 		
 		storage = new Storage();
+		storage.setSize(50);
+		storage.setEquipmentsAllowedToStore(Arrays.asList("Máscara Descartável","Teste Covid","Álcool em gel"));
 		storage.addEquipment(new Equipment("Máscara Descartável", 4, true));
 		storage.addEquipment(new Equipment("Teste Covid", 20, true));
 		storage.addEquipment(new Equipment("Álcool em gel", 10, true));
