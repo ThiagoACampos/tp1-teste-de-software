@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import testedesoftware.clinicacovid.exceptions.InvalidDateForSchedulingException;
+import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingException;
+
 public class Calendar {
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
@@ -11,7 +14,16 @@ public class Calendar {
 		return appointments;
 	}
 	
-	public void schedule(Appointment appointment) {
+	public void schedule(Appointment appointment) throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		
+		if (appointment.getAppointmentDate().before(new Date())) {
+			throw new InvalidDateForSchedulingException();
+		}
+		
+		if (busyAt(appointment.getAppointmentDate())) {
+			throw new UnavailableDateForSchedulingException();
+		}
+		
 		appointments.add(appointment);
 	}
 	
