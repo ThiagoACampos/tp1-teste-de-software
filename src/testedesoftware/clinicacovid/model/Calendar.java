@@ -3,12 +3,14 @@ package testedesoftware.clinicacovid.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import testedesoftware.clinicacovid.exceptions.InvalidDateForSchedulingException;
 import testedesoftware.clinicacovid.exceptions.NonexistingAppointmentException;
 import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingException;
 
 public class Calendar {
+	
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
 	public List<Appointment> getAppointments() {
@@ -53,7 +55,7 @@ public class Calendar {
 		for(Appointment ap : appointments) {
 
 			// If there is an appointment with a time close to date, return true
-			if(Math.abs(ap.getAppointmentDate().getTime() - date.getTime()) < 5*60*1000) {
+			if(Math.abs(getMinutesDifference(date, ap.getAppointmentDate())) < 60) {
 				return true;
 			}
 		}
@@ -73,5 +75,10 @@ public class Calendar {
         return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
                 cal1.get(java.util.Calendar.MONTH) == cal2.get(java.util.Calendar.MONTH) &&
                 cal1.get(java.util.Calendar.DAY_OF_MONTH) == cal2.get(java.util.Calendar.DAY_OF_MONTH);
+    }
+	
+	private Long getMinutesDifference(Date date1, Date date2) {
+        long diffInMilliseconds = date2.getTime() - date1.getTime();
+        return TimeUnit.MILLISECONDS.toMinutes(diffInMilliseconds);
     }
 }
