@@ -1,76 +1,183 @@
 package test.testedesoftware.clinicacovid.unitTests;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import testedesoftware.clinicacovid.exceptions.InvalidDateForSchedulingException;
+import testedesoftware.clinicacovid.exceptions.NonexistingAppointmentException;
+import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingException;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.Patient;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 public class CalendarTest {
+	
+	private Calendar calendar;
+	private Patient defaultPatient;
+	
+	@BeforeEach
+	void setUp() {
+		calendar = new Calendar();
+		defaultPatient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+	}
+	
+	@Test
+	void testScheduleOneAppointment() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment = new Appointment(date, defaultPatient);
+		
+		calendar.schedule(appointment);
+		
+		assertEquals(calendar.getAppointments().size(), 1);
+		assertEquals(calendar.getAppointments().get(0), appointment);
+	}
+	
+	@Test
+	void testScheduleMoreThanOneAppointment() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Date date1 = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date date2 = Date.from(new Date().toInstant().plus(2, ChronoUnit.HOURS));
+		Appointment appointment1 = new Appointment(date1, defaultPatient);
+		Appointment appointment2 = new Appointment(date2, defaultPatient);		
+		
+		calendar.schedule(appointment1);
+		calendar.schedule(appointment2);
+		
+		assertEquals(calendar.getAppointments().size(), 2);
+		assertTrue(calendar.getAppointments().contains(appointment1));
+		assertTrue(calendar.getAppointments().contains(appointment2));
+	}
+	
+	@Test
+	void testScheduleAtInvalidDate() {
+		Date date = Date.from(new Date().toInstant().minus(1, ChronoUnit.HOURS));
+		
+		Appointment appointment = new Appointment(date, defaultPatient);
+		
+		Assertions.assertThrows(InvalidDateForSchedulingException.class, () -> {
+			calendar.schedule(appointment);
+		});		
+	}	
+	
+	@Test
+	void testScheduleAtUnavailableDate() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {		
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment1 = new Appointment(date, defaultPatient);
+		Appointment appointment2 = new Appointment(date, defaultPatient);		
+		
+		calendar.schedule(appointment1);
+		
+		Assertions.assertThrows(UnavailableDateForSchedulingException.class, () -> {
+			calendar.schedule(appointment2);
+		});
+	}
+	
+	
+	@Test
+	void testCancelAppointment() throws Exception {
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment = new Appointment(date, defaultPatient);
+		
+		calendar.schedule(appointment);
+		calendar.cancel(appointment);
+		
+		assertTrue(calendar.getAppointments().isEmpty());		
+	}
+	
+	@Test
+	void testCancelNonexistingAppointment() {
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment = new Appointment(date, defaultPatient);
+		
+		Assertions.assertThrows(NonexistingAppointmentException.class, () -> {
+			calendar.cancel(appointment);
+		});		
+	}
+	
 
-  Date date = new Date();
-  Calendar calendar = new Calendar();
-  Patient patient1 = new Patient("Fernando", 21, "fernando@gmail.com", "31998863120", "fernando");
-  Appointment appointment = new Appointment(date, patient1);
+	@Test
+	void testFilterByDayEmpty() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
+		
+		calendar.schedule(new Appointment(today, defaultPatient));
+		
+		assertFalse(calendar.filterDay(today).isEmpty());
+		assertTrue(calendar.filterDay(tomorrow).isEmpty());
+	}
+	
+	@Test
+	void testFilterByDayAtDifferentDays() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
+		Appointment appointmentToday = new Appointment(today, defaultPatient);
+		Appointment appointmentTomorrow = new Appointment(tomorrow, defaultPatient);
+				
+		calendar.schedule(appointmentToday);
+		calendar.schedule(appointmentTomorrow);
+		
+		assertEquals(calendar.filterDay(today).size(), 1);
+		assertTrue(calendar.filterDay(today).contains(appointmentToday));
+		assertEquals(calendar.filterDay(tomorrow).size(), 1);
+		assertTrue(calendar.filterDay(tomorrow).contains(appointmentTomorrow));
+	}
+	
+	@Test
+	void testFilterByDayWithDifferentHours() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		java.util.Calendar c = java.util.Calendar.getInstance();		
+		c.setTime(new Date());
+		c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+		
+        c.set(java.util.Calendar.HOUR_OF_DAY, 10);        
+        Date date1 = c.getTime();        
+        
+        c.set(java.util.Calendar.HOUR_OF_DAY, 11);
+        Date date2 = c.getTime();
 
-  @Test
-  void testScheduleAppointment() {
-    calendar.schedule(appointment);
-
-    final var appointments = calendar.getAppointments();
-    assertTrue(appointments.contains(appointment));
-  }
-
-  @Test
-  void testCancelAppointmentSuccess() throws Exception {
-    calendar.schedule(appointment);
-    calendar.cancel(appointment);
-    final var appointments = calendar.getAppointments();
-    assertTrue(appointments.isEmpty());
-  }
-
-  @Test
-  void testCancelAppointmentFailure() throws Exception {
-    Patient patient2 = new Patient("Bernardo", 21, "bernardo@gmail.com", "99999999999", "bernardo");
-
-    final Appointment secondAppointment = new Appointment(new Date(), patient2);
-
-    calendar.schedule(appointment);
-    final Exception exception = assertThrows(Exception.class, () -> {
-      calendar.cancel(secondAppointment);
-    });
-
-    assertEquals("Compromisso inexistente nesta agenda.", exception.getMessage());
-  }
-
-  @Test
-  void testFilterDay() {
-    calendar.schedule(appointment);
-    final List<Appointment> appointments = calendar.filterDay(date);
-
-    assertEquals(1, appointments.size());
-  }
-
-  @Test
-  void testBusyAtSucess() {
-    calendar.schedule(appointment);
-    assertTrue(calendar.busyAt(date));
-  }
-
-  @Test
-  void testBusyAtFailure() throws ParseException {
-    calendar.schedule(appointment);
-    Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2022-06-25");
-    assertFalse(calendar.busyAt(date2));
-  }
-
+		calendar.schedule(new Appointment(date1, defaultPatient));
+		calendar.schedule(new Appointment(date2, defaultPatient));
+		
+		assertEquals(calendar.filterDay(date1).size(), 2);
+		assertEquals(calendar.filterDay(date2).size(), 2);
+	}
+	
+	
+	@Test
+	void testBusyAtWithEmptyAppointments() {		
+		assertTrue(calendar.getAppointments().isEmpty());
+		assertFalse(calendar.busyAt(new Date()));		
+	}
+	
+	@Test
+	void testBusyAtAvailableDate() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
+		Date availableDate = Date.from(new Date().toInstant().plus(2, ChronoUnit.DAYS));
+		Date dateBefore = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date dateAfter = Date.from(new Date().toInstant().plus(3, ChronoUnit.DAYS));		
+				
+		calendar.schedule(new Appointment(dateBefore, defaultPatient));
+		calendar.schedule(new Appointment(dateAfter, defaultPatient));
+		Boolean isBusyAt = calendar.busyAt(availableDate);
+		
+		assertFalse(isBusyAt);
+	}
+	
+	@Test
+	void testBusyAtUnavailableDate() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {			
+		Date date = Date.from(new Date().toInstant().plus(2, ChronoUnit.DAYS));
+		Date inferiorLimit = Date.from(date.toInstant().minus(59, ChronoUnit.MINUTES));
+		Date superiorLimit = Date.from(date.toInstant().plus(59, ChronoUnit.MINUTES));
+				
+		calendar.schedule(new Appointment(date, defaultPatient));		
+		
+		assertTrue(calendar.busyAt(inferiorLimit));
+		assertTrue(calendar.busyAt(superiorLimit));
+	}
+	
 }
