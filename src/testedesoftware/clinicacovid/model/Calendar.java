@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import testedesoftware.clinicacovid.exceptions.InvalidDateForSchedulingException;
+import testedesoftware.clinicacovid.exceptions.NonexistingAppointmentException;
 import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingException;
 
 public class Calendar {
@@ -27,13 +28,13 @@ public class Calendar {
 		appointments.add(appointment);
 	}
 	
-	public void cancel(Appointment appointment) throws Exception {
+	public void cancel(Appointment appointment) throws NonexistingAppointmentException {
 
 		if (appointments.contains(appointment)){
 			appointments.remove(appointment);
 		}
 		else{
-			throw new Exception("Compromisso inexistente nesta agenda.");
+			throw new NonexistingAppointmentException("Compromisso inexistente nesta agenda.");
 		}
 	}
 	

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import testedesoftware.clinicacovid.exceptions.InvalidDateForSchedulingException;
+import testedesoftware.clinicacovid.exceptions.NonexistingAppointmentException;
 import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingException;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
@@ -78,4 +79,29 @@ public class CalendarTest {
 			calendar.schedule(appointment2);
 		});
 	}
+	
+	
+	@Test
+	void testCancelAppointment() throws Exception {
+		Patient patient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment = new Appointment(date, patient);
+		
+		calendar.schedule(appointment);
+		calendar.cancel(appointment);
+		
+		assertTrue(calendar.getAppointments().isEmpty());		
+	}
+	
+	@Test
+	void testCancelNonexistingAppointment() {
+		Patient patient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		Date date = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Appointment appointment = new Appointment(date, patient);
+		
+		Assertions.assertThrows(NonexistingAppointmentException.class, () -> {
+			calendar.cancel(appointment);
+		});		
+	}
+	
 }
