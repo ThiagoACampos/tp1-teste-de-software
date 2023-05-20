@@ -35,7 +35,7 @@ public class EquipmentTest {
   }
 
   @Test
-  void testUseConsumableEquipmentSuccess() {
+  void testUseConsumableEquipmentSuccess() throws Exception {
     equipment.use();
     assertEquals(9, equipment.getQuantity());
   }
@@ -55,13 +55,13 @@ public class EquipmentTest {
   }
 
   @Test
-  void testAddUnits() {
+  void testAddUnits() throws Exception {
     equipment.addUnits(21);
     assertEquals(31, equipment.getQuantity());
   }
 
   @Test
-  void testAddAndUseUnitsUntilSpent() {
+  void testAddAndUseUnitsUntilSpent() throws Exception {
     equipment.addUnits(21);
     assertEquals(31, equipment.getQuantity());
     for(int i = 0; i < 31; i++){
@@ -115,7 +115,7 @@ public class EquipmentTest {
   }
 
   @Test
-  void testCheckQuantityAtMaximum() {
+  void testCheckQuantityAtMaximum() throws Exception  {
     // The maximum number of units for a given equipment is 100.
     equipment.setQuantity(100);
     assertEquals(100, equipment.getQuantity());

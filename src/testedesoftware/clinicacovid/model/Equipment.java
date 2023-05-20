@@ -31,7 +31,7 @@ public class Equipment {
 		return max;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(int quantity) throws Exception {
 		this.checkQuantity(quantity);
 		this.quantity = quantity;
 	}

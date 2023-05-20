@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTest {
-  
-  Equipment seringa = new Equipment("Seringa", 250, false);
-  Equipment pcr = new Equipment("PCR", 300, true);
+
+  Equipment seringa = new Equipment("Seringa", 25, false);
+  Equipment pcr = new Equipment("PCR", 30, true);
 
   Storage storage = new Storage();
 
@@ -29,15 +29,15 @@ public class StorageTest {
     storage.useEquipments();
 
     assertEquals(1, storage.getEquipments().size());
-    assertEquals(299, pcr.getQuantity());
+    assertEquals(29, pcr.getQuantity());
   }
 
   @Test
-  void testAddUnits() {
+  void testAddUnits() throws Exception {
     storage.addEquipment(pcr);
     storage.addUnits(0, 10);
 
-    assertEquals(310, pcr.getQuantity());
+    assertEquals(40, pcr.getQuantity());
   }
 
   @Test
