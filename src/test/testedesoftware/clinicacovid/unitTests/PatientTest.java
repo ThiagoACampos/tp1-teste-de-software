@@ -32,7 +32,7 @@ public class PatientTest {
   }
 
   @Test
-  void testCreatePatitent() {
+  void testCreatePatitent() throws Exception {
     Patient patient = new Patient(name, age, email, phone, username);
 
     assertEquals(name, patient.getName());
