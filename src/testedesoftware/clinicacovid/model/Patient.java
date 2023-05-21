@@ -19,15 +19,15 @@ public class Patient {
 	public Patient(String name, int age, String email, String phone, String username) {
 		super();
 		phone = phone.replaceAll("[^0-9]", "");
-		_validatePatientFields(name, age, email, phone, username);
 		this.username = username;
 		this.name = name;
 		this.age = age;
 		this.email = email;
 		this.phone = phone;
+		_validatePatientFields();
 	}
 
-	private void _validatePatientFields(String name, int age, String email, String phone, String username) {
+	private void _validatePatientFields() {
 		if (name == null || name.trim().isEmpty()) {
 			throw new IllegalArgumentException("Name cannot be null, empty nor blank");
 		}

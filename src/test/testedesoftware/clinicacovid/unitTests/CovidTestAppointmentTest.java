@@ -46,7 +46,7 @@ public class CovidTestAppointmentTest {
   @Test
   void testChangePatient() {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
-    Patient newPatient = new Patient("NewPatientName", 18, "newPatientEmail", "3199999-9999", "newPatientUsername");
+    Patient newPatient = new Patient("NewPatientName", 18, "newPatient@email.com", "3199999-9999", "newPatientUsername");
     covidTestAppointment.setPatient(newPatient);
 
     assertEquals(newPatient, covidTestAppointment.getPatient());
