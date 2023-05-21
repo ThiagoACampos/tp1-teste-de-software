@@ -84,7 +84,7 @@ public class PatientTest {
       new Patient(name, age, "", phone, username);
     });
 
-    assertEquals(exception.getMessage(), "Email cannot be empty");
+    assertEquals(exception.getMessage(), "Email is not valid");
   }
 
   @Test
@@ -93,7 +93,7 @@ public class PatientTest {
       new Patient(name, age, null, phone, username);
     });
 
-    assertEquals(exception.getMessage(), "Email cannot be null");
+    assertEquals(exception.getMessage(), "Email is not valid");
   }
 
   @Test
@@ -102,7 +102,7 @@ public class PatientTest {
       new Patient(name, age, " ", phone, username);
     });
 
-    assertEquals(exception.getMessage(), "Email cannot be blank");
+    assertEquals(exception.getMessage(), "Email is not valid");
   }
 
   @Test
@@ -111,7 +111,7 @@ public class PatientTest {
       new Patient(name, age, email, "", username);
     });
 
-    assertEquals(exception.getMessage(), "Phone cannot be empty");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -120,7 +120,7 @@ public class PatientTest {
       new Patient(name, age, email, null, username);
     });
 
-    assertEquals(exception.getMessage(), "Phone cannot be null");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -129,7 +129,7 @@ public class PatientTest {
       new Patient(name, age, email, " ", username);
     });
 
-    assertEquals(exception.getMessage(), "Phone cannot be blank");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -165,7 +165,7 @@ public class PatientTest {
       new Patient(name, age, email, phone, "");
     });
 
-    assertEquals(exception.getMessage(), "Username cannot be empty");
+    assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");
   }
 
   @Test
@@ -174,7 +174,7 @@ public class PatientTest {
       new Patient(name, age, email, phone, null);
     });
 
-    assertEquals(exception.getMessage(), "Username cannot be null");
+    assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");
   }
 
   @Test
@@ -183,6 +183,6 @@ public class PatientTest {
       new Patient(name, age, email, phone, " ");
     });
 
-    assertEquals(exception.getMessage(), "Username cannot be blank");
+    assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");
   }
 }
