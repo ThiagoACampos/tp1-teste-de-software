@@ -26,7 +26,7 @@ public class PatientTest {
 
     name = "PatientName";
     age = 18;
-    email = "patientEmail";
+    email = "patient@email.com";
     phone = "3199999-9999";
     username = "patientUsername";
   }
