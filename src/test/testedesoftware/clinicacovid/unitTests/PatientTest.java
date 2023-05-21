@@ -48,7 +48,7 @@ public class PatientTest {
       new Patient("", age, email, phone, username);
     });
 
-    assertEquals(exception, "Name cannot be null, empty nor blank");
+    assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
   }
 
   @Test
@@ -57,7 +57,7 @@ public class PatientTest {
       new Patient(null, age, email, phone, username);
     });
 
-    assertEquals(exception, "Name cannot be null, empty nor blank");
+    assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
   }
 
   @Test
@@ -66,7 +66,7 @@ public class PatientTest {
       new Patient(" ", age, email, phone, username);
     });
 
-    assertEquals(exception, "Name cannot be null, empty nor blank");
+    assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
   }
 
   @Test
@@ -75,7 +75,7 @@ public class PatientTest {
       new Patient(name, -1, email, phone, username);
     });
 
-    assertEquals(exception, "Age cannot be negative");
+    assertEquals(exception.getMessage(), "Age cannot be negative");
   }
 
   @Test
@@ -84,7 +84,7 @@ public class PatientTest {
       new Patient(name, age, "", phone, username);
     });
 
-    assertEquals(exception, "Email cannot be empty");
+    assertEquals(exception.getMessage(), "Email cannot be empty");
   }
 
   @Test
@@ -93,7 +93,7 @@ public class PatientTest {
       new Patient(name, age, null, phone, username);
     });
 
-    assertEquals(exception, "Email cannot be null");
+    assertEquals(exception.getMessage(), "Email cannot be null");
   }
 
   @Test
@@ -102,7 +102,7 @@ public class PatientTest {
       new Patient(name, age, " ", phone, username);
     });
 
-    assertEquals(exception, "Email cannot be blank");
+    assertEquals(exception.getMessage(), "Email cannot be blank");
   }
 
   @Test
@@ -111,7 +111,7 @@ public class PatientTest {
       new Patient(name, age, email, "", username);
     });
 
-    assertEquals(exception, "Phone cannot be empty");
+    assertEquals(exception.getMessage(), "Phone cannot be empty");
   }
 
   @Test
@@ -120,7 +120,7 @@ public class PatientTest {
       new Patient(name, age, email, null, username);
     });
 
-    assertEquals(exception, "Phone cannot be null");
+    assertEquals(exception.getMessage(), "Phone cannot be null");
   }
 
   @Test
@@ -129,7 +129,7 @@ public class PatientTest {
       new Patient(name, age, email, " ", username);
     });
 
-    assertEquals(exception, "Phone cannot be blank");
+    assertEquals(exception.getMessage(), "Phone cannot be blank");
   }
 
   @Test
@@ -138,7 +138,7 @@ public class PatientTest {
       new Patient(name, age, email, "9999-9999", username);
     });
 
-    assertEquals(exception, "Phone number is not valid");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -147,7 +147,7 @@ public class PatientTest {
       new Patient(name, age, email, "3199999-99998", username);
     });
 
-    assertEquals(exception, "Phone number is not valid");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -156,7 +156,7 @@ public class PatientTest {
       new Patient(name, age, email, "319999-999", username);
     });
 
-    assertEquals(exception, "Phone number is not valid");
+    assertEquals(exception.getMessage(), "Phone number is not valid");
   }
 
   @Test
@@ -165,7 +165,7 @@ public class PatientTest {
       new Patient(name, age, email, phone, "");
     });
 
-    assertEquals(exception, "Username cannot be empty");
+    assertEquals(exception.getMessage(), "Username cannot be empty");
   }
 
   @Test
@@ -174,7 +174,7 @@ public class PatientTest {
       new Patient(name, age, email, phone, null);
     });
 
-    assertEquals(exception, "Username cannot be null");
+    assertEquals(exception.getMessage(), "Username cannot be null");
   }
 
   @Test
@@ -183,6 +183,6 @@ public class PatientTest {
       new Patient(name, age, email, phone, " ");
     });
 
-    assertEquals(exception, "Username cannot be blank");
+    assertEquals(exception.getMessage(), "Username cannot be blank");
   }
 }
