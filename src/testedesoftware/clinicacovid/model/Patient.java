@@ -18,7 +18,7 @@ public class Patient {
 	
 	public Patient(String name, int age, String email, String phone, String username) throws Exception {
 		super();
-		phone = phone.replaceAll("[^0-9]", "");
+		phone = (phone != null) ? phone.replaceAll("[^0-9]", "") : null;
 		this.username = username;
 		this.name = name;
 		this.age = age;
