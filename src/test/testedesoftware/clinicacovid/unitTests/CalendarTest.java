@@ -26,7 +26,7 @@ public class CalendarTest {
 	@BeforeEach
 	void setUp() {
 		calendar = new Calendar();
-		defaultPatient = new Patient("Bernardo", 30, "bernardo@gmail.com", "319999999", "bernardo");
+		defaultPatient = new Patient("Bernardo", 30, "bernardo@gmail.com", "3199999999", "bernardo");
 	}
 	
 	@Test

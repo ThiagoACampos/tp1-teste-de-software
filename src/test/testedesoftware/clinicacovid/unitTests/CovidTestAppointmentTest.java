@@ -22,7 +22,7 @@ public class CovidTestAppointmentTest {
 
     nurse = new Nurse("Nurse", "nurseUser");
     appointmentDate = new Date();
-    patient = new Patient("PatientName", 18, "patient@email.com", "+553199999-9999", "patientUsername");
+    patient = new Patient("PatientName", 18, "patient@email.com", "3199999-9999", "patientUsername");
   }
 
   @Test
@@ -46,7 +46,7 @@ public class CovidTestAppointmentTest {
   @Test
   void testChangePatient() {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
-    Patient newPatient = new Patient("NewPatientName", 18, "newPatientEmail", "+553199999-9999", "newPatientUsername");
+    Patient newPatient = new Patient("NewPatientName", 18, "newPatientEmail", "3199999-9999", "newPatientUsername");
     covidTestAppointment.setPatient(newPatient);
 
     assertEquals(newPatient, covidTestAppointment.getPatient());
