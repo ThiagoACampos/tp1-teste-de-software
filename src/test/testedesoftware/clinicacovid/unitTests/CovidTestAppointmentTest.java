@@ -7,7 +7,9 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Date;
+import testedesoftware.clinicacovid.model.Nurse;
+import testedesoftware.clinicacovid.model.Patient;
+import testedesoftware.clinicacovid.model.CovidTestAppointment;
 
 public class CovidTestAppointmentTest {
 

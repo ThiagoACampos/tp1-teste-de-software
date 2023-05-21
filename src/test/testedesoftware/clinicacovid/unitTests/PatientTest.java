@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Date;
 import java.lang.IllegalArgumentException;
 
+import testedesoftware.clinicacovid.model.Patient;
+
 public class PatientTest {
 
   private String name;
