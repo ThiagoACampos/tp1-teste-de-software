@@ -1,6 +1,6 @@
-package testedesoftware.clinicacovid.model;
 package test.testedesoftware.clinicacovid.unitTests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Date;
 

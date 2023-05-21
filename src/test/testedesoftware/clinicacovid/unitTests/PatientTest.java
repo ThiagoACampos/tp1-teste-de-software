@@ -1,8 +1,7 @@
-package testedesoftware.clinicacovid.model;
 package test.testedesoftware.clinicacovid.unitTests;
 
-import org.
-.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
