@@ -27,7 +27,7 @@ public class Patient {
 		this.phone = phone;
 	}
 
-	private _validatePatientFields(String name, int age, String email, String phone, String username) {
+	private void _validatePatientFields(String name, int age, String email, String phone, String username) {
 		if (name == null || name.trim().isEmpty()) {
 			throw new IllegalArgumentException("Name cannot be null, empty nor blank");
 		}
