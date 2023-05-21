@@ -24,7 +24,7 @@ public class CalendarTest {
 	private Patient defaultPatient;
 	
 	@BeforeEach
-	void setUp() {
+	void setUp() throws Exception {
 		calendar = new Calendar();
 		defaultPatient = new Patient("Bernardo", 30, "bernardo@gmail.com", "3199999999", "bernardo");
 	}

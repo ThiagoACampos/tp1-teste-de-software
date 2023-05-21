@@ -32,6 +32,17 @@ public class PatientTest {
   }
 
   @Test
+  void testCreatePatitent() {
+    Patient patient = new Patient(name, age, email, phone, username);
+
+    assertEquals(name, patient.getName());
+    assertEquals(age, patient.getAge());
+    assertEquals(email, patient.getEmail());
+    assertEquals(phone, patient.getPhone());
+    assertEquals(username, patient.getUsername());
+  }
+
+  @Test
   void testNameEmpty() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
       new Patient("", age, email, phone, username);
