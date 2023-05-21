@@ -38,7 +38,7 @@ public class PatientTest {
     assertEquals(name, patient.getName());
     assertEquals(age, patient.getAge());
     assertEquals(email, patient.getEmail());
-    assertEquals(phone, patient.getPhone());
+    assertEquals(phone.replaceAll("[^0-9]", ""), patient.getPhone());
     assertEquals(username, patient.getUsername());
   }
 
