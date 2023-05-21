@@ -18,7 +18,7 @@ public class CovidTestAppointmentTest {
   private Patient patient;
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws Exception{
 
     nurse = new Nurse("Nurse", "nurseUser");
     appointmentDate = new Date();
@@ -44,7 +44,7 @@ public class CovidTestAppointmentTest {
   }
 
   @Test
-  void testChangePatient() {
+  void testChangePatient() throws Exception {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
     Patient newPatient = new Patient("NewPatientName", 18, "newPatient@email.com", "3199999-9999", "newPatientUsername");
     covidTestAppointment.setPatient(newPatient);
