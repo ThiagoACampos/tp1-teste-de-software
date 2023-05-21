@@ -11,7 +11,7 @@ public class Patient {
 	private String email;
 	private String phone;
 	
-	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_%+-]{3,}@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$";
+	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_%+-]{3,}@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 	private static final String PHONE_NUMBER_REGEX = "^[1-9]{2}9?[0-9]{8}$";
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
