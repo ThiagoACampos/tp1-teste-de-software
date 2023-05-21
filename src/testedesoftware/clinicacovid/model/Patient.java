@@ -16,7 +16,7 @@ public class Patient {
 	private static final String PHONE_NUMBER_REGEX = "^[1-9]{2}9?[0-9]{8}$";
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
 	
-	public Patient(String name, int age, String email, String phone, String username) {
+	public Patient(String name, int age, String email, String phone, String username) throws Exception {
 		super();
 		phone = phone.replaceAll("[^0-9]", "");
 		this.username = username;
@@ -27,7 +27,7 @@ public class Patient {
 		_validatePatientFields();
 	}
 
-	private void _validatePatientFields() {
+	private void _validatePatientFields() throws Exception {
 		if (name == null || name.trim().isEmpty()) {
 			throw new IllegalArgumentException("Name cannot be null, empty nor blank");
 		}
