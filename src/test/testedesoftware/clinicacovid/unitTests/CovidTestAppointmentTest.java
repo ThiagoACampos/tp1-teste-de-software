@@ -18,7 +18,7 @@ public class CovidTestAppointmentTest {
   @BeforeEach
   void setUp() {
 
-    nurse = new Nurse("Nurse", "nurseUser", );
+    nurse = new Nurse("Nurse", "nurseUser");
     appointmentDate = new Date();
     patient = new Patient("PatientName", 18, "patient@email.com", "+553199999-9999", "patientUsername");
   }
@@ -26,7 +26,7 @@ public class CovidTestAppointmentTest {
   @Test
   void testChangeNurse() {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
-    Nurse newNurse = new Nurse("NewNurse", "newNurseUser", );
+    Nurse newNurse = new Nurse("NewNurse", "newNurseUser");
     covidTestAppointment.setNurse(newNurse);
 
     assertEquals(newNurse, covidTestAppointment.getNurse());
