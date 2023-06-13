@@ -36,6 +36,10 @@ public class Doctor extends User {
 	}
 	
 	public void setCrm(String crm) {
+		
+		if (crm == null) {
+			throw new IllegalArgumentException("CRM can't be null");
+		}
 		if (!crm.matches(CRM_REGEX)) {
 			throw new IllegalArgumentException("Invalid CRM");
 		}
