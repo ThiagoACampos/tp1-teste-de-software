@@ -21,9 +21,9 @@ public class Patient extends User {
 	public Patient(String name, String birthdate, String email, String phone, String username, String password) throws Exception {
 		super(name, username, password);
 		phone = (phone != null) ? phone.replaceAll("[^0-9]", "") : null;
-		this.name = name;
 		this.birthdate = DateUtils.stringToDate(birthdate);
 		this.email = email;
+		this.phone = phone;
 		this.validatePatientFields();
 	}
 
