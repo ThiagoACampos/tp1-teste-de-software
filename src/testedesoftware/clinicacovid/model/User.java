@@ -20,6 +20,12 @@ public class User {
 	protected String username;
 	
 	protected String password;
+	
+	protected User(String name, String username, String password) {
+		this.name = name;
+		this.username = username;
+		this.password = password;
+	}
 
 	public Integer getId() {
 		return id;

@@ -12,6 +12,16 @@ import testedesoftware.clinicacovid.exceptions.UnavailableDateForSchedulingExcep
 public class Calendar {
 	
 	private List<Appointment> appointments = new ArrayList<Appointment>();
+
+	public Calendar() {
+	}
+	
+	public Calendar(List<Appointment> initialAppointments) {
+		if (initialAppointments != null) {
+			this.appointments = initialAppointments;
+		}
+	}
+	
 	
 	public List<Appointment> getAppointments() {
 		return appointments;

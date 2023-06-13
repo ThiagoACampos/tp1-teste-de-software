@@ -14,5 +14,6 @@
         <property name="show_sql">true</property>
     	<mapping class="testedesoftware.clinicacovid.model.User" />
 		<mapping class="testedesoftware.clinicacovid.model.Patient" />
+		<mapping class="testedesoftware.clinicacovid.model.Doctor" />
     </session-factory>
 </hibernate-configuration>

@@ -19,14 +19,11 @@ public class Patient extends User {
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
 	
 	public Patient(String name, String birthdate, String email, String phone, String username, String password) throws Exception {
-		super();
+		super(name, username, password);
 		phone = (phone != null) ? phone.replaceAll("[^0-9]", "") : null;
 		this.name = name;
 		this.birthdate = DateUtils.stringToDate(birthdate);
 		this.email = email;
-		this.phone = phone;
-		this.username = username;
-		this.password = password;
 		this.validatePatientFields();
 	}
 
