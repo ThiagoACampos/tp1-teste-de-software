@@ -1,11 +1,8 @@
 package test.testedesoftware.clinicacovid.integrationTests;
 
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
-
-import testedesoftware.clinicacovid.model.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +14,20 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.rules.TemporaryFolder;
+
+import testedesoftware.clinicacovid.model.Appointment;
+import testedesoftware.clinicacovid.model.Calendar;
+import testedesoftware.clinicacovid.model.CovidTestAppointment;
+import testedesoftware.clinicacovid.model.Doctor;
+import testedesoftware.clinicacovid.model.DoctorAppointment;
+import testedesoftware.clinicacovid.model.Equipment;
+import testedesoftware.clinicacovid.model.Nurse;
+import testedesoftware.clinicacovid.model.Patient;
+import testedesoftware.clinicacovid.model.Storage;
 
 public class IntegrationTests {
 
@@ -33,7 +41,7 @@ public class IntegrationTests {
 	@BeforeEach
 	protected void dataSetup() throws Exception {
 
-	    patient = new Patient("José",  20, "jose@gmail.com", "31999999999", "jose");
+	    patient = new Patient("José", "01/01/2000", "jose@gmail.com", "31999999999", "jose", "123");
 	    doctor = new Doctor("AB1234", "Roberto", "roberto");
 	    storage = new Storage();
 	    storage.setSize(50);
@@ -130,7 +138,7 @@ public class IntegrationTests {
         assertEquals(1, doctor.getCalendar().getAppointments().size());
         assertTrue(fileToSave.exists());
         assertTrue(fileContent.contains(newAppointment.getPatient().getName()));
-        assertTrue(fileContent.contains(Integer.toString(newAppointment.getPatient().getAge())));
+        assertTrue(fileContent.contains(newAppointment.getPatient().getBirthdate().toString()));
         assertTrue(fileContent.contains(newAppointment.getPatient().getEmail()));
     }
 

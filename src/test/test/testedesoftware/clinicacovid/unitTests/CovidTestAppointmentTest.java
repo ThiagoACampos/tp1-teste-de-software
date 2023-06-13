@@ -1,15 +1,15 @@
 package test.testedesoftware.clinicacovid.unitTests;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import testedesoftware.clinicacovid.model.CovidTestAppointment;
 import testedesoftware.clinicacovid.model.Nurse;
 import testedesoftware.clinicacovid.model.Patient;
-import testedesoftware.clinicacovid.model.CovidTestAppointment;
 
 public class CovidTestAppointmentTest {
 
@@ -22,7 +22,7 @@ public class CovidTestAppointmentTest {
 
     nurse = new Nurse("Nurse", "nurseUser");
     appointmentDate = new Date();
-    patient = new Patient("PatientName", 18, "patient@email.com", "3199999-9999", "patientUsername");
+    patient = new Patient("PatientName", "01/01/2000", "patient@email.com", "3199999-9999", "patientUsername", "123");
   }
 
   @Test
@@ -46,7 +46,7 @@ public class CovidTestAppointmentTest {
   @Test
   void testChangePatient() throws Exception {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
-    Patient newPatient = new Patient("NewPatientName", 18, "newPatient@email.com", "3199999-9999", "newPatientUsername");
+    Patient newPatient = new Patient("NewPatientName", "01/01/2000", "newPatient@email.com", "3199999-9999", "newPatientUsername", "");
     covidTestAppointment.setPatient(newPatient);
 
     assertEquals(newPatient, covidTestAppointment.getPatient());

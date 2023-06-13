@@ -39,7 +39,7 @@ public class Appointment {
         fstream.write(this.getAppointmentDate().toString());
         fstream.write(this.getPatient().getName());
         fstream.write(this.getPatient().getEmail());
-        fstream.write(this.getPatient().getAge());
+        fstream.write(this.getPatient().getBirthdate().toString());
         fstream.close();
         
         return fileToSave;
