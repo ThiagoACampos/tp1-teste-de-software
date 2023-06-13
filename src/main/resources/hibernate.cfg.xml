@@ -15,5 +15,6 @@
     	<mapping class="testedesoftware.clinicacovid.model.User" />
 		<mapping class="testedesoftware.clinicacovid.model.Patient" />
 		<mapping class="testedesoftware.clinicacovid.model.Doctor" />
+		<mapping class="testedesoftware.clinicacovid.model.Nurse" />
     </session-factory>
 </hibernate-configuration>

@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import testedesoftware.clinicacovid.enums.DoctorExpertise;
+import testedesoftware.clinicacovid.enums.NurseExpertise;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.CovidTestAppointment;
@@ -95,7 +96,7 @@ public class IntegrationTests {
     void testCovidTestWithoutEquipmentExceptionThrown() throws ParseException, Exception {
 
     	// Scheduling Covid Test Appointment
-    	Nurse nurse = new Nurse("Luana","luana");
+    	Nurse nurse = new Nurse("Luana Silva", "luana.silva", "senha123", "SP/123.456-AE", NurseExpertise.CommunityHealth);
     	Date scheduleDate = new SimpleDateFormat("yyyy-MM-dd").parse("2022-01-15");
     	CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse,scheduleDate,patient);
     	doctor.getCalendar().getAppointments().add(covidTestAppointment);

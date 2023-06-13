@@ -32,6 +32,11 @@ public class DoctorTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidCrmError_nullValue() {
+		doctor.setCrm(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidCrmError_invalidState() {
 		doctor.setCrm("ABC-123456");				
 	}

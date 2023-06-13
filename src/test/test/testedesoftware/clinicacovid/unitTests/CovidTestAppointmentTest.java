@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import testedesoftware.clinicacovid.enums.NurseExpertise;
 import testedesoftware.clinicacovid.model.CovidTestAppointment;
 import testedesoftware.clinicacovid.model.Nurse;
 import testedesoftware.clinicacovid.model.Patient;
@@ -19,8 +20,7 @@ public class CovidTestAppointmentTest {
 
   @BeforeEach
   void setUp() throws Exception{
-
-    nurse = new Nurse("Nurse", "nurseUser");
+    nurse = new Nurse("Nurse", "nurseUser", "nurse123456", "SP/123.456-AE", NurseExpertise.CriticalCare);
     appointmentDate = new Date();
     patient = new Patient("PatientName", "01/01/2000", "patient@email.com", "3199999-9999", "patientUsername", "123");
   }
@@ -28,7 +28,7 @@ public class CovidTestAppointmentTest {
   @Test
   void testChangeNurse() {
     CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
-    Nurse newNurse = new Nurse("NewNurse", "newNurseUser");
+    Nurse newNurse = new Nurse("NewNurse", "newNurseUser", "nurse123456", "SP/456.789-AE", null);
     covidTestAppointment.setNurse(newNurse);
 
     assertEquals(newNurse, covidTestAppointment.getNurse());
