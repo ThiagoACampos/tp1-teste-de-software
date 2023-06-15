@@ -104,7 +104,7 @@ public class CalendarTest {
 
 	@Test
 	void testFilterByDayEmpty() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
-		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.SECONDS));
 		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
 		
 		calendar.schedule(new Appointment(today, defaultPatient));
@@ -115,7 +115,7 @@ public class CalendarTest {
 	
 	@Test
 	void testFilterByDayAtDifferentDays() throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
-		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.HOURS));
+		Date today = Date.from(new Date().toInstant().plus(1, ChronoUnit.SECONDS));
 		Date tomorrow = Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS));
 		Appointment appointmentToday = new Appointment(today, defaultPatient);
 		Appointment appointmentTomorrow = new Appointment(tomorrow, defaultPatient);
