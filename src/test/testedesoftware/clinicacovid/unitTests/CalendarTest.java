@@ -110,7 +110,7 @@ public class CalendarTest {
 		calendar.schedule(new Appointment(today, defaultPatient));
 		
 		assertFalse(calendar.filterDay(today).isEmpty());
-		assertTrue(calendar.filterDay(tomorrow).isEmpty());
+		assertTrue(calendar.filterDay(tomorrow).isEmpty()); //
 	}
 	
 	@Test
