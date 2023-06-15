@@ -51,7 +51,7 @@ jobs:
         path: build/libs
 
     - name: Salva resultado jacoco
-        uses: actions/upload-artifact@v3
-        with:
-          name: Jacoco Result
-          path: build/jacoco
+      uses: actions/upload-artifact@v3
+      with:
+        name: Jacoco Result
+        path: build/jacoco
