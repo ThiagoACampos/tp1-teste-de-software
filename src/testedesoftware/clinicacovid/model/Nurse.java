@@ -22,6 +22,10 @@ public class Nurse extends User {
 	@Transient
 	private Calendar calendar;
 	
+	public Nurse() {
+		
+	}
+	
 	public Nurse(String name, String username, String password, String coren, NurseExpertise expertise) {
 		super(name, username, password);
 		this.setCoren(coren);

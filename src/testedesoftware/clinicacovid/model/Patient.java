@@ -18,6 +18,10 @@ public class Patient extends User {
 	private static final String PHONE_NUMBER_REGEX = "^[1-9]{2}9?[0-9]{8}$";
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
 	
+    public Patient() {
+    	
+    }
+    
 	public Patient(String name, String birthdate, String email, String phone, String username, String password) throws Exception {
 		super(name, username, password);
 		phone = (phone != null) ? phone.replaceAll("[^0-9]", "") : null;
