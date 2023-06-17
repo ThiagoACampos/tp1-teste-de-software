@@ -62,7 +62,7 @@ public class IntegrationTests {
 
     	// Scheduling Appointment
     	Date scheduleDate = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-08");
-    	DoctorAppointment docAppointment = new DoctorAppointment(doctor, scheduleDate, patient);
+    	DoctorAppointment docAppointment = new DoctorAppointment(scheduleDate, patient, doctor);
     	doctor.getCalendar().getAppointments().add(docAppointment);
 
     	// Canceling Appointment
@@ -79,8 +79,8 @@ public class IntegrationTests {
     	// Scheduling Appointment
     	Date scheduleDateOne = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-08");
     	Date scheduleDateTwo = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-15");
-    	DoctorAppointment docAppointmentOne = new DoctorAppointment(doctor, scheduleDateOne, patient);
-    	DoctorAppointment docAppointmentTwo = new DoctorAppointment(doctor, scheduleDateTwo, patient);
+    	DoctorAppointment docAppointmentOne = new DoctorAppointment(scheduleDateOne, patient, doctor);
+    	DoctorAppointment docAppointmentTwo = new DoctorAppointment(scheduleDateTwo, patient, doctor);
     	doctor.getCalendar().getAppointments().add(docAppointmentOne);
     	doctor.getCalendar().getAppointments().add(docAppointmentTwo);
 
@@ -98,7 +98,7 @@ public class IntegrationTests {
     	// Scheduling Covid Test Appointment
     	Nurse nurse = new Nurse("Luana Silva", "luana.silva", "senha123", "SP/123.456-AE", NurseExpertise.CommunityHealth);
     	Date scheduleDate = new SimpleDateFormat("yyyy-MM-dd").parse("2022-01-15");
-    	CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse,scheduleDate,patient);
+    	CovidTestAppointment covidTestAppointment = new CovidTestAppointment(scheduleDate, patient, nurse);
     	doctor.getCalendar().getAppointments().add(covidTestAppointment);
 
     	// Setting Equipment quantity to zero
@@ -127,7 +127,7 @@ public class IntegrationTests {
 
     	// Scheduling Appointment
     	Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2022-10-12");
-        DoctorAppointment docAppointment = new DoctorAppointment(doctor, date, patient);
+        DoctorAppointment docAppointment = new DoctorAppointment(date, patient, doctor);
         doctor.getCalendar().getAppointments().add(docAppointment);
         Appointment newAppointment = doctor.getCalendar().getAppointments().get(0);
 

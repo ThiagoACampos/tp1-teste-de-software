@@ -72,7 +72,7 @@ public class PatientController extends ModelController<Patient> {
 			if(!covidTestAps.isEmpty()) {
 				println("\nExames de Covid Marcados");
 				for(CovidTestAppointment ap : covidTestAps) {
-					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + ap.getAppointmentDate().toLocaleString());
+					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + ap.getDate().toLocaleString());
 				}
 				println("");
 			}
@@ -80,7 +80,7 @@ public class PatientController extends ModelController<Patient> {
 			if(!docAps.isEmpty()) {
 				println("\nConsultas Médicas Marcadas");
 				for(DoctorAppointment ap : docAps) {
-					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + ap.getAppointmentDate().toLocaleString());
+					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + ap.getDate().toLocaleString());
 				}
 				println("");
 			}
@@ -160,7 +160,7 @@ public class PatientController extends ModelController<Patient> {
 				println("Opção inválida");
 				continue;
 			}else {
-				DoctorAppointment ap = new DoctorAppointment(doctor, availableTimes.get(option-1), patient);
+				DoctorAppointment ap = new DoctorAppointment(availableTimes.get(option-1), patient, doctor);
 				doctor.getCalendar().getAppointments().add(ap);
 				println("Marcado com sucesso!");
 				return true;

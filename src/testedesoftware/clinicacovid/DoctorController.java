@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import testedesoftware.clinicacovid.DataController;
-import testedesoftware.clinicacovid.GetUserInterface;
-import testedesoftware.clinicacovid.Main;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.Doctor;
@@ -69,7 +66,7 @@ public class DoctorController extends ModelController<Doctor>  {
     println("Consultas Marcadas: ");
     for(Appointment ap : aps) {
       Patient pat = ap.getPatient();
-      Date date = ap.getAppointmentDate();
+      Date date = ap.getDate();
       println(date.toLocaleString() + ": " 
           + pat.getName() + " (" + pat.getPhone() + ")");
     }

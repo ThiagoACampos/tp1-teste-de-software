@@ -27,7 +27,7 @@ public class CovidTestAppointmentTest {
 
   @Test
   void testChangeNurse() {
-    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
+    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(appointmentDate, patient, nurse);
     Nurse newNurse = new Nurse("NewNurse", "newNurseUser", "nurse123456", "SP/456.789-AE", null);
     covidTestAppointment.setNurse(newNurse);
 
@@ -36,16 +36,16 @@ public class CovidTestAppointmentTest {
 
   @Test
   void testChangeAppointmentDate() {
-    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
+    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(appointmentDate, patient, nurse);
     Date newAppointmentDate = new Date();
-    covidTestAppointment.setAppointmentDate(newAppointmentDate);
+    covidTestAppointment.setDate(newAppointmentDate);
 
-    assertEquals(newAppointmentDate, covidTestAppointment.getAppointmentDate());
+    assertEquals(newAppointmentDate, covidTestAppointment.getDate());
   }
 
   @Test
   void testChangePatient() throws Exception {
-    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse, appointmentDate, patient);
+    CovidTestAppointment covidTestAppointment = new CovidTestAppointment(appointmentDate, patient, nurse);
     Patient newPatient = new Patient("NewPatientName", "01/01/2000", "newPatient@email.com", "3199999-9999", "newPatientUsername", "");
     covidTestAppointment.setPatient(newPatient);
 

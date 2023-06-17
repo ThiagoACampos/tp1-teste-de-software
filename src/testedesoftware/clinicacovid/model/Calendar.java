@@ -29,11 +29,11 @@ public class Calendar {
 	
 	public void schedule(Appointment appointment) throws InvalidDateForSchedulingException, UnavailableDateForSchedulingException {
 		
-		if (appointment.getAppointmentDate().before(new Date())) {
+		if (appointment.getDate().before(new Date())) {
 			throw new InvalidDateForSchedulingException();
 		}
 		
-		if (busyAt(appointment.getAppointmentDate())) {
+		if (busyAt(appointment.getDate())) {
 			throw new UnavailableDateForSchedulingException();
 		}
 		
@@ -54,7 +54,7 @@ public class Calendar {
 		List<Appointment> res = new ArrayList<>();
 		
 		for(Appointment ap : appointments) {
-			if (this.isSameDay(day, ap.getAppointmentDate())) {
+			if (this.isSameDay(day, ap.getDate())) {
 				res.add(ap);
 			}
 		}
@@ -65,7 +65,7 @@ public class Calendar {
 		for(Appointment ap : appointments) {
 
 			// If there is an appointment with a time close to date, return true
-			if(Math.abs(getMinutesDifference(date, ap.getAppointmentDate())) < 60) {
+			if(Math.abs(getMinutesDifference(date, ap.getDate())) < 60) {
 				return true;
 			}
 		}
