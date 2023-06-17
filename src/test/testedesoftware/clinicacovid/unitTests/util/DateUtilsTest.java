@@ -1,4 +1,4 @@
-package test.testedesoftware.clinicacovid.unitTests.util;
+package testedesoftware.clinicacovid.unitTests.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

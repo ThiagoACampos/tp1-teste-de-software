@@ -1,4 +1,4 @@
-package test.testedesoftware.clinicacovid.unitTests;
+package testedesoftware.clinicacovid.unitTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
