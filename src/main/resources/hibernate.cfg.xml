@@ -19,5 +19,7 @@
 		<mapping class="testedesoftware.clinicacovid.model.Appointment" />
 		<mapping class="testedesoftware.clinicacovid.model.CovidTestAppointment" />
 		<mapping class="testedesoftware.clinicacovid.model.DoctorAppointment" />
+		<mapping class="testedesoftware.clinicacovid.model.Equipment" />
+		<mapping class="testedesoftware.clinicacovid.model.Storage" />
     </session-factory>
 </hibernate-configuration>
