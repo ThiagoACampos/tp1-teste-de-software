@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class View {
 
-	Scanner in;
+	protected Scanner in;
 		
 	public View() {
 		this.in = new Scanner(System.in);
@@ -13,6 +13,4 @@ public abstract class View {
 	public void print(String s) {
 		System.out.println(s);
 	}
-	
-	public abstract Object render();
 }
