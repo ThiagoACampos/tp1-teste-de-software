@@ -21,14 +21,14 @@ public class PatientView extends View {
 			if(!covidTestAps.isEmpty()) {
 				println("\nExames de Covid Marcados\n");
 				for(CovidTestAppointment ap : covidTestAps) {
-					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
+					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + DateUtils.dateToString(ap.getDate(), "dd/MM/yyyy HH:mm"));
 				}
 			}
 			
 			if(!docAps.isEmpty()) {
 				println("\nConsultas Médicas Marcadas\n");
 				for(DoctorAppointment ap : docAps) {
-					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
+					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + DateUtils.dateToString(ap.getDate(), "dd/MM/yyyy HH:mm"));
 				}
 			}
 		}
@@ -81,7 +81,7 @@ public class PatientView extends View {
 	public Date selectAppointmentTime(List<Date> availableDates) {
 		while(true) {
 			for(int i = 0; i < availableDates.size(); i++) {
-				println((i+1) + ". Marcar para " + DateUtils.dateToString(availableDates.get(i)));
+				println((i+1) + ". Marcar para " + DateUtils.dateToString(availableDates.get(i), "dd/MM/yyyy HH:mm"));
 			}
 			println((availableDates.size() + 1) + ". Voltar");
 			
