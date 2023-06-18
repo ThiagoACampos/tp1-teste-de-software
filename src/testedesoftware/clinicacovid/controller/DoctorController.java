@@ -1,18 +1,15 @@
 package testedesoftware.clinicacovid.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import testedesoftware.clinicacovid.dao.DoctorDao;
 import testedesoftware.clinicacovid.enums.DoctorAction;
-import testedesoftware.clinicacovid.model.Appointment;
-import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.Doctor;
 import testedesoftware.clinicacovid.view.DoctorView;
 import testedesoftware.clinicacovid.view.MenuOption;
 
-public class DoctorController {
+public class DoctorController extends ProfessionalController {
 
 	private DoctorDao dao;
 	private DoctorView view;
@@ -26,7 +23,7 @@ public class DoctorController {
 		Doctor doctor = this.getDoctor(id);
 		
 		if (doctor == null) {
-			view.doctorNotFound();
+			view.professionalNotFound();
 			return;
 		}
 		
@@ -41,7 +38,7 @@ public class DoctorController {
 			DoctorAction action = (DoctorAction) view.selectMenuOption(menuOptions); 
 				
 			if (action == DoctorAction.SEE_SCHEDULE) {
-				this.showScheduledAppointments(doctor.getCalendar());
+				this.showScheduledAppointments(doctor.getCalendar(), view);
 			} else {
 				return;
 			}			
@@ -56,24 +53,6 @@ public class DoctorController {
 		return this.dao.findAll();
 	}
 	
-	public void showScheduledAppointments(Calendar calendar) {		
-		List<Appointment> appointments = this.filterAppointmentsByDay(calendar);
-		
-		if (appointments == null) {
-			return;
-		}
-		
-		view.showScheduledAppointments(appointments);		
-	}
 	
-	public List<Appointment> filterAppointmentsByDay(Calendar calendar) {
-		Date filterDay = this.view.filterDay();		
-		
-		if (filterDay == null) {
-			return null;
-		}
-		
-		return calendar.filterDay(filterDay);		
-	}
 	
 }

@@ -27,6 +27,10 @@ public class Equipment {
 	public static final String exceptionEquipmentQuantityMustBePositive = "Quantidade de um equipamento deve ser positiva.";
 	public static final String exceptionEquipmentQuantityExceedsMaximum = "A capacidade máxima de armazenamento é foi execedida.";
 
+	public Equipment() {
+		
+	}
+	
 	public Equipment(String name, Integer quantity, Boolean consumable) {
 		this.name = name;
 		this.quantity = quantity;

@@ -9,6 +9,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,9 +23,11 @@ public class Storage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	private String name;
+	
 	private Integer size;
 		
-    @OneToMany(mappedBy="storage", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="storage", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Equipment> equipments;
 	
 	@Transient
@@ -132,6 +135,14 @@ public class Storage {
 
         return fileToSave;
 
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

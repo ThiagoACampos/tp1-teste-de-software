@@ -48,7 +48,7 @@ public class DoctorControllerTest {
 	@Test
 	public void testErrorWhenUserIsNotADoctor() {
 		controller.handleDoctor(2);
-		verify(view).doctorNotFound();
+		verify(view).professionalNotFound();
 		verify(view, times(0)).showWelcomeMessage(anyString());
 	}
 	
@@ -72,7 +72,7 @@ public class DoctorControllerTest {
 		when(view.filterDay()).thenReturn(null);
 		Calendar calendar = new Calendar();
 		
-		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar);
+		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar, view);
 		
 		assertNull(appointments);
 	}
@@ -83,7 +83,7 @@ public class DoctorControllerTest {
 		when(view.filterDay()).thenReturn(new Date());
 		Calendar calendar = new Calendar();
 		
-		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar);
+		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar, view);
 		
 		assertTrue(appointments.isEmpty());
 	}
@@ -97,7 +97,7 @@ public class DoctorControllerTest {
 		when(view.selectMenuOption(anyList())).thenReturn((MenuOption) DoctorAction.SEE_SCHEDULE).thenReturn(null);
 		when(view.filterDay()).thenReturn(date);
 		
-		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar);
+		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar, view);
 		
 		assertEquals(appointments.size(), 2);
 		assertEquals(appointments.get(0), ap1);
