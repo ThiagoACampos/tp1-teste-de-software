@@ -14,10 +14,10 @@ public class PatientView extends View {
 	
 	
 	public PatientAction selectMenuOption(String patientName) {
-		print("Bem vindo(a) " + patientName);
+		println("Bem vindo(a) " + patientName + "!");
 		
 		while(true) {
-			println("Voce é um?");				
+			println("O que deseja fazer?");				
 				
 			PatientAction[] menu = PatientAction.values();
 			

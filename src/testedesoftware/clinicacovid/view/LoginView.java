@@ -14,7 +14,7 @@ public class LoginView extends View {
 	}
 	
 	public void unauthorized() {		
-		println("Usuário ou senha incorretos" );
+		println("Usuário ou senha incorretos!" );
 	}	
 	
 	private String readString() {
