@@ -3,12 +3,12 @@ package testedesoftware.clinicacovid.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import testedesoftware.clinicacovid.dao.AppointmentDao;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.CovidTestAppointment;
-import testedesoftware.clinicacovid.model.Doctor;
 import testedesoftware.clinicacovid.model.DoctorAppointment;
 import testedesoftware.clinicacovid.util.DateUtils;
 
@@ -28,9 +28,8 @@ public class AppointmentController {
 		return this.dao.getCovidTestAppointmentsByPatient(idPatient);
 	}
 	
-	public List<Date> getAvailableTimes(Date startDate, Doctor doctor) {
+	public List<Date> getAvailableTimes(Date startDate, List<Calendar> calendars) {
 		List<Date> dates = new ArrayList<>();
-		Calendar calendar = doctor.getCalendar();
 		
 		startDate = DateUtils.getNextBusinessHoursStart(startDate);
 		
@@ -41,14 +40,26 @@ public class AppointmentController {
 				date = DateUtils.getNextBusinessHoursStart(date);
 			}
 			
-			if (!calendar.busyAt(date)) {
-				dates.add(date);
+			for (Calendar calendar : calendars) {
+				if (!calendar.busyAt(date)) {
+					dates.add(date);
+					break;
+				}	
 			}
+			
 			
 			date = DateUtils.getNextHour(date);			
 		}
 		
 		return dates;
+	}
+	
+	public Calendar getCalendarAvailableAtDate(List<Calendar> calendars, Date date) {
+		Optional<Calendar> calendar = calendars.stream().filter(c -> c.busyAt(date) == false).findFirst();
+		System.out.print(calendar.isPresent());
+		System.out.print(calendar.orElse(null));
+		System.out.print(calendar.get());
+		return calendar.orElse(null);	
 	}
 	
 	public void createAppointment(Appointment appointment) {

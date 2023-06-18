@@ -77,4 +77,8 @@ public class NurseController extends ProfessionalController {
 		return this.view.selectStorage(storages);
 	}
 	
+	public List<Nurse> findAllNurses() {
+		return this.dao.findAll();
+	}
+	
 }

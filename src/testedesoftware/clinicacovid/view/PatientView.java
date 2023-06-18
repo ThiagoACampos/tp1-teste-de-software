@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import testedesoftware.clinicacovid.enums.AppointmentType;
-import testedesoftware.clinicacovid.enums.PatientAction;
 import testedesoftware.clinicacovid.model.CovidTestAppointment;
 import testedesoftware.clinicacovid.model.Doctor;
 import testedesoftware.clinicacovid.model.DoctorAppointment;
@@ -13,57 +12,34 @@ import testedesoftware.clinicacovid.util.DateUtils;
 public class PatientView extends View {
 	
 	
-	public PatientAction selectMenuOption(String patientName) {
-		println("Bem vindo(a) " + patientName + "!");
-		
-		while(true) {
-			println("O que deseja fazer?");				
-				
-			PatientAction[] menu = PatientAction.values();
-			
-			for (Integer i = 0; i < menu.length; i++) {
-				println((i + 1 ) + ": " + menu[i].getDescription());
-			}
-			
-			print("Digite a opção: ");
-			
-			int option = in.nextInt();
-			
-			if (option >= 1 && option <= menu.length) {
-				return menu[option - 1];
-			}
-			
-			println("Opção inválida");
-		}
-	}
 	
 	public void showScheduledAppointments(List<DoctorAppointment> docAps, List<CovidTestAppointment> covidTestAps) {
 		
 		if(docAps.isEmpty() && covidTestAps.isEmpty()) {
-			println("Nenhuma consulta marcada");
+			println("\nNenhuma consulta marcada!");
 		}else {
 			if(!covidTestAps.isEmpty()) {
-				println("Exames de Covid Marcados");
+				println("\nExames de Covid Marcados\n");
 				for(CovidTestAppointment ap : covidTestAps) {
 					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
 				}
 			}
 			
 			if(!docAps.isEmpty()) {
-				println("Consultas Médicas Marcadas");
+				println("\nConsultas Médicas Marcadas\n");
 				for(DoctorAppointment ap : docAps) {
 					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
 				}
 			}
 		}
 		
-		println("Digite alguma coisa para voltar");		
+		println("\nDigite alguma coisa para voltar");		
 		this.in.next();
 		return;
 	}
 	
 	
-	public AppointmentType selectAppointmentTypes() {
+	public AppointmentType selectAppointmentType() {
 		while(true) {
 			println("Voce quer ver horários para?");
 			println("1. " + AppointmentType.MEDICAL_APPOINTMENT.getDescription());
@@ -123,6 +99,10 @@ public class PatientView extends View {
 	
 	public void showAppointmentSuccessfullyScheduled() {
 		println("Consulta marcada com sucesso!");
+	}
+	
+	public void showPatientNotRegistered() {
+		println("Você não possui um cadastro de paciente!");
 	}
 	
 

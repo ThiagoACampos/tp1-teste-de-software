@@ -53,6 +53,4 @@ public class DoctorController extends ProfessionalController {
 		return this.dao.findAll();
 	}
 	
-	
-	
 }
