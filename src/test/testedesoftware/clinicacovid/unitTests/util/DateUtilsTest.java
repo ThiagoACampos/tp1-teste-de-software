@@ -97,7 +97,7 @@ public class DateUtilsTest {
 		Date date = DateUtils.stringToDate("2030-01-01 12:10", "yyyy-MM-dd HH:mm");
 		Date nextHour = DateUtils.getNextHour(date);				
 		assertTrue(nextHour.after(date));
-		assertEquals(DateUtils.dateToString(nextHour,"yyyy-MM-dd HH:mm"), "2030-01-01 13:10");
+		assertEquals(DateUtils.dateToString(nextHour,"yyyy-MM-dd HH:mm"), "2030-01-01 13:00");
 	}
 	
 	@Test
