@@ -42,10 +42,10 @@ public class PatientController {
 		}		
 	}
 	
-	public void showScheduledAppointments(Patient patient) {
-		List<DoctorAppointment> doctosAppointments = this.appointmentController.getDoctorAppointmentsByPatient(patient.getId());
+	private void showScheduledAppointments(Patient patient) {
+		List<DoctorAppointment> doctorAppointments = this.appointmentController.getDoctorAppointmentsByPatient(patient.getId());
 		List<CovidTestAppointment> covidTestAppointments = this.appointmentController.getCovidTestAppointmentsByPatient(patient.getId());
-		this.view.showScheduledAppointments(doctosAppointments, covidTestAppointments);
+		this.view.showScheduledAppointments(doctorAppointments, covidTestAppointments);
 	}
 	
 	public void newDoctorAppointment(Patient patient) {
@@ -54,14 +54,13 @@ public class PatientController {
 		
 		List<Date> availableDates = this.appointmentController.getAvailableTimes(new Date(), doctor);		
 		Date selectedDate = this.view.selectAppointmentTime(availableDates);
-		
-		
+				
 		DoctorAppointment appointment = new DoctorAppointment(selectedDate, patient, doctor);
 		this.appointmentController.createAppointment(appointment);
 		this.view.showAppointmentSuccessfullyScheduled();
 	}
 		
-	private Patient getPatient(Integer id) {
+	public Patient getPatient(Integer id) {
 		return this.dao.getById(id);
 	}
 
