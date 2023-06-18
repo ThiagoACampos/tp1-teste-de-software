@@ -28,7 +28,7 @@ public class AppointmentDao extends GenericDao<Appointment> {
         EntityManager em = getFactory().createEntityManager();
         em.getTransaction().begin();
         
-        Query query = em.createQuery("select ap from CovidAppointment ap where ap.patient.id = :id");
+        Query query = em.createQuery("select ap from CovidTestAppointment ap where ap.patient.id = :id");
         query.setParameter("id", idPatient);
         
         List<CovidTestAppointment> resultList = (List<CovidTestAppointment>) query.getResultList();
