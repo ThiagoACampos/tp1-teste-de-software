@@ -34,13 +34,13 @@ public class DateUtils {
 	public static Boolean isAtBusinessHours(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		return cal.get(Calendar.HOUR) >= 8 && cal.get(Calendar.HOUR) <= 18; 
+		return cal.get(Calendar.HOUR_OF_DAY) >= 8 && cal.get(Calendar.HOUR_OF_DAY) < 18; 
 	}
 	
 	public static Date getNextHour(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		cal.add(Calendar.HOUR, 1);
+		cal.add(Calendar.HOUR_OF_DAY, 1);
 		return cal.getTime();
 	}
 	
@@ -54,10 +54,10 @@ public class DateUtils {
 		cal.setTime(date);
 		
 		if (cal.get(Calendar.HOUR) < 8) {
-			cal.set(Calendar.HOUR, 8);
+			cal.set(Calendar.HOUR_OF_DAY, 8);
 		} else {
 			cal.add(Calendar.DAY_OF_YEAR, 1);
-			cal.set(Calendar.HOUR, 8);
+			cal.set(Calendar.HOUR_OF_DAY, 8);
 		}
 		
 		return cal.getTime(); 
