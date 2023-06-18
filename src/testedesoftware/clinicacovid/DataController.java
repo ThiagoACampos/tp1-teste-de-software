@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import testedesoftware.clinicacovid.enums.DoctorExpertise;
 import testedesoftware.clinicacovid.model.Appointment;
 import testedesoftware.clinicacovid.model.Calendar;
 import testedesoftware.clinicacovid.model.CovidTestAppointment;
@@ -28,36 +29,37 @@ public class DataController {
 	public DataController() throws Exception{
 		// Initialize initial data
 		// TODO: Fetch from the database
-		
-		Doctor d1 = new Doctor("AB1234", "Roberto", "roberto");
-		Doctor d2 = new Doctor("CD5678", "Juliano", "juliano");
-		Doctor d3 = new Doctor("EF9012", "Marta", "marta");
-		
+
+		Doctor d1 = new Doctor("AB-123456", DoctorExpertise.Dermatologist, "João Silva", "joao.silva", "Senha123456");
+		Doctor d2 = new Doctor("BC-123456", DoctorExpertise.Dermatologist, "Maria Oliveira", "maria.oliveira", "Senha123456");
+		Doctor d3 = new Doctor("DE-123456", DoctorExpertise.Dermatologist, "Carlos Moreira", "carlos.moreira", "Senha123456");
+
 		doctors.add(d1);
 		doctors.add(d2);
 		doctors.add(d3);
-		
-		Nurse n1 = new Nurse("Marcos", "marcos");
-		Nurse n2 = new Nurse("Camila", "camila");
-		Nurse n3 = new Nurse("Gabriel", "gabriel");
-		Nurse n4 = new Nurse("Fernanda", "fernanda");
-		
-		nurses.add(n1);
-		nurses.add(n2);
-		nurses.add(n3);
-		nurses.add(n4);
-		
-		Patient p1 = new Patient("Vinícius", 20, "vini@gmail.com", "31999999999", "vini");
-		Patient p2 = new Patient("Otávio",  20, "vini@gmail.com", "31999999999", "otavio");
-		Patient p3 = new Patient("Bernardo",  20, "vini@gmail.com", "31999999999", "bernardo");
-		Patient p4 = new Patient("Fernando",  20, "vini@gmail.com", "31999999999", "fernando");
-		Patient p5 = new Patient("Thiago",  20, "vini@gmail.com", "31999999999", "thiago");
+//		
+//		Nurse n1 = new Nurse("Marcos", "marcos");
+//		Nurse n2 = new Nurse("Camila", "camila");
+//		Nurse n3 = new Nurse("Gabriel", "gabriel");
+//		Nurse n4 = new Nurse("Fernanda", "fernanda");
+//		
+//		nurses.add(n1);
+//		nurses.add(n2);
+//		nurses.add(n3);
+//		nurses.add(n4);
+//		
+		Patient p1 = new Patient("Bernardo Nunes", "15/12/2000", "bernardo@gmail.com", "31912341234", "bernardo.nunes", "123");
+//		Patient p2 = new Patient("Otávio",  20, "vini@gmail.com", "31999999999", "otavio");
+//		Patient p3 = new Patient("Bernardo",  20, "vini@gmail.com", "31999999999", "bernardo");
+//		Patient p4 = new Patient("Fernando",  20, "vini@gmail.com", "31999999999", "fernando");
+//		Patient p5 = new Patient("Thiago",  20, "vini@gmail.com", "31999999999", "thiago");
 		patients.add(p1);
-		patients.add(p2);
-		patients.add(p3);
-		patients.add(p4);
-		patients.add(p5);
+//		patients.add(p2);
+//		patients.add(p3);
+//		patients.add(p4);
+//		patients.add(p5);
 		
+//		
 		storage = new Storage();
 		storage.setSize(50);
 		storage.setEquipmentsAllowedToStore(Arrays.asList("Máscara Descartável","Teste Covid","Álcool em gel"));

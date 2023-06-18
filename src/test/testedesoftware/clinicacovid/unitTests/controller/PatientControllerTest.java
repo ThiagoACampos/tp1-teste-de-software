@@ -202,6 +202,7 @@ public class PatientControllerTest {
 		when(view.selectAppointmentType()).thenReturn(AppointmentType.COVID_TEST);
 		when(view.selectAppointmentTime(anyList())).thenReturn(date);
 		when(nurseController.findAllNurses()).thenReturn(Arrays.asList(nurse));
+		when(appointmentController.getCalendarAvailableAtDate(anyList(), any())).thenReturn(nurse.getCalendar());
 		ArgumentCaptor<CovidTestAppointment> argument = ArgumentCaptor.forClass(CovidTestAppointment.class);
 		
 		Boolean created = controller.handleNewAppointment(defaultPatient);

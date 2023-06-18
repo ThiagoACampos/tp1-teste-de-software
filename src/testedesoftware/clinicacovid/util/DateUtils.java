@@ -40,6 +40,8 @@ public class DateUtils {
 	public static Date getNextHour(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
 		cal.add(Calendar.HOUR_OF_DAY, 1);
 		return cal.getTime();
 	}
@@ -53,7 +55,7 @@ public class DateUtils {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		
-		if (cal.get(Calendar.HOUR) < 8) {
+		if (cal.get(Calendar.HOUR_OF_DAY) < 8) {
 			cal.set(Calendar.HOUR_OF_DAY, 8);
 		} else {
 			cal.add(Calendar.DAY_OF_YEAR, 1);

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
@@ -46,8 +45,7 @@ public class DateUtilsTest {
 	
 	@Test(expected=ParseException.class)
 	public void testStringToDateParseException_invalidMonth() throws ParseException {		
-		Date date = DateUtils.stringToDate("06/13/2010");
-		System.out.println(date);
+		DateUtils.stringToDate("06/13/2010");
 	}	
 	
 	@Test(expected=ParseException.class)
@@ -78,8 +76,8 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testIsBusinessHoursWhenItsNot() throws ParseException {
-		Date inferior = DateUtils.stringToDate("2030-01-01 07:59", "yy-MM-dd HH:mm");
-		Date superior = DateUtils.stringToDate("2030-01-01 18:00", "yy-MM-dd HH:mm");
+		Date inferior = DateUtils.stringToDate("2030-01-01 07:59", "yyyy-MM-dd HH:mm");
+		Date superior = DateUtils.stringToDate("2030-01-01 18:00", "yyyy-MM-dd HH:mm");
 		
 		assertFalse(DateUtils.isAtBusinessHours(inferior));
 		assertFalse(DateUtils.isAtBusinessHours(superior));
@@ -87,8 +85,8 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testIsBusinessHoursWhenItsIs() throws ParseException {
-		Date inferior = DateUtils.stringToDate("2030-01-01 08:00", "yy-MM-dd HH:mm");
-		Date superior = DateUtils.stringToDate("2030-01-01 17:59", "yy-MM-dd HH:mm");
+		Date inferior = DateUtils.stringToDate("2030-01-01 08:00", "yyyy-MM-dd HH:mm");
+		Date superior = DateUtils.stringToDate("2030-01-01 17:59", "yyyy-MM-dd HH:mm");
 		
 		assertTrue(DateUtils.isAtBusinessHours(inferior));
 		assertTrue(DateUtils.isAtBusinessHours(superior));
@@ -96,35 +94,33 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testGetNextHour() throws ParseException {
-		Date date = new Date();
-		Date nextHour = DateUtils.getNextHour(date);		
-		
-		Long diff = TimeUnit.HOURS.convert(nextHour.getTime() - date.getTime(), TimeUnit.MILLISECONDS);		
+		Date date = DateUtils.stringToDate("2030-01-01 12:10", "yyyy-MM-dd HH:mm");
+		Date nextHour = DateUtils.getNextHour(date);				
 		assertTrue(nextHour.after(date));
-		assertEquals(diff, 1);
+		assertEquals(DateUtils.dateToString(nextHour,"yyyy-MM-dd HH:mm"), "2030-01-01 13:10");
 	}
 	
 	@Test
 	public void testGetNextBusinessHoursStart_alreadyIsBusinessHours() throws ParseException {
-		Date date = DateUtils.stringToDate("2030-01-01 12:00", "yy-MM-dd HH:mm");		
+		Date date = DateUtils.stringToDate("2030-01-01 12:00", "yyyy-MM-dd HH:mm");		
 		Date nextStart = DateUtils.getNextBusinessHoursStart(date); 		
 		assertEquals(date, nextStart);
 	}
 	
 	@Test
 	public void testGetNextBusinessHoursStart_beforeBusinessHours() throws ParseException {
-		Date date = DateUtils.stringToDate("2030-01-01 06:00", "yy-MM-dd HH:mm");		
+		Date date = DateUtils.stringToDate("2030-01-01 06:00", "yyyy-MM-dd HH:mm");		
 		Date nextStart = DateUtils.getNextBusinessHoursStart(date);
 		
-		assertEquals(DateUtils.stringToDate("2030-01-01 08:00", "yy-MM-dd HH:mm"), nextStart);
+		assertEquals(DateUtils.stringToDate("2030-01-01 08:00", "yyyy-MM-dd HH:mm"), nextStart);
 	}
 	
 	@Test
 	public void testGetNextBusinessHoursStart_afterBusinessHours() throws ParseException {
-		Date date = DateUtils.stringToDate("2030-01-01 20:00", "yy-MM-dd HH:mm");		
+		Date date = DateUtils.stringToDate("2030-01-01 20:00", "yyyy-MM-dd HH:mm");		
 		Date nextStart = DateUtils.getNextBusinessHoursStart(date);
 		
-		assertEquals(DateUtils.stringToDate("2030-01-02 08:00", "yy-MM-dd HH:mm"), nextStart);
+		assertEquals(DateUtils.stringToDate("2030-01-02 08:00", "yyyy-MM-dd HH:mm"), nextStart);
 	}
 	
 }

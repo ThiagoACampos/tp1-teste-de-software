@@ -29,25 +29,27 @@ public class AppointmentController {
 	}
 	
 	public List<Date> getAvailableTimes(Date startDate, List<Calendar> calendars) {
-		List<Date> dates = new ArrayList<>();
+		List<Date> dates = new ArrayList<>();		
 		
-		startDate = DateUtils.getNextBusinessHoursStart(startDate);
-		
-		Date date = startDate;
+		startDate = DateUtils.getNextHour(startDate);
+		Date date = DateUtils.getNextBusinessHoursStart(startDate);
 		
 		while(dates.size() < 10) {			
-			if (DateUtils.isAtBusinessHours(date)) {
+			if (!DateUtils.isAtBusinessHours(date)) {
 				date = DateUtils.getNextBusinessHoursStart(date);
+			}			
+						
+			if (calendars.isEmpty()) {
+				dates.add(date);
+			} else {
+				for (Calendar calendar : calendars) {
+					if (!calendar.busyAt(date)) {
+						dates.add(date);
+						break;
+					}	
+				}
 			}
-			
-			for (Calendar calendar : calendars) {
-				if (!calendar.busyAt(date)) {
-					dates.add(date);
-					break;
-				}	
-			}
-			
-			
+						
 			date = DateUtils.getNextHour(date);			
 		}
 		
@@ -56,9 +58,6 @@ public class AppointmentController {
 	
 	public Calendar getCalendarAvailableAtDate(List<Calendar> calendars, Date date) {
 		Optional<Calendar> calendar = calendars.stream().filter(c -> c.busyAt(date) == false).findFirst();
-		System.out.print(calendar.isPresent());
-		System.out.print(calendar.orElse(null));
-		System.out.print(calendar.get());
 		return calendar.orElse(null);	
 	}
 	

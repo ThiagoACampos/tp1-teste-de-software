@@ -3,7 +3,6 @@ package testedesoftware.clinicacovid.controller;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import testedesoftware.clinicacovid.dao.PatientDao;
@@ -123,7 +122,13 @@ public class PatientController {
 		}
 			
 		Calendar selectedCalendar = this.appointmentController.getCalendarAvailableAtDate(calendars, selectedDate);
-		Nurse selectedNurse = nurses.stream().filter(n -> n.getCalendar().equals(selectedCalendar)).findFirst().get();
+		Nurse selectedNurse = nurses.stream().filter(n -> n.getCalendar().equals(selectedCalendar)).findFirst().get();		
+		
+		for (Nurse n : nurses) {
+			if (selectedCalendar.equals(n.getCalendar())) {
+				selectedNurse = n;
+			}
+		}
 				
 		CovidTestAppointment appointment = new CovidTestAppointment(selectedDate, patient, selectedNurse);
 		this.appointmentController.createAppointment(appointment);
