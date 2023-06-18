@@ -17,12 +17,12 @@ public class PatientView extends View {
 		print("Bem vindo(a) " + patientName);
 		
 		while(true) {
-			print("Voce é um?");				
+			println("Voce é um?");				
 				
 			PatientAction[] menu = PatientAction.values();
 			
 			for (Integer i = 0; i < menu.length; i++) {
-				print((i + 1 ) + ": " + menu[i].getDescription());
+				println((i + 1 ) + ": " + menu[i].getDescription());
 			}
 			
 			print("Digite a opção: ");
@@ -33,31 +33,31 @@ public class PatientView extends View {
 				return menu[option - 1];
 			}
 			
-			print("Opção inválida");
+			println("Opção inválida");
 		}
 	}
 	
 	public void showScheduledAppointments(List<DoctorAppointment> docAps, List<CovidTestAppointment> covidTestAps) {
 		
 		if(docAps.isEmpty() && covidTestAps.isEmpty()) {
-			print("Nenhuma consulta marcada");
+			println("Nenhuma consulta marcada");
 		}else {
 			if(!covidTestAps.isEmpty()) {
-				print("Exames de Covid Marcados");
+				println("Exames de Covid Marcados");
 				for(CovidTestAppointment ap : covidTestAps) {
-					print("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
+					println("Enfermeiro(a): " + ap.getNurse().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
 				}
 			}
 			
 			if(!docAps.isEmpty()) {
-				print("Consultas Médicas Marcadas");
+				println("Consultas Médicas Marcadas");
 				for(DoctorAppointment ap : docAps) {
-					print("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
+					println("Doutor(a): " + ap.getDoctor().getName() + ", horário: " + DateUtils.dateToString(ap.getDate()));
 				}
 			}
 		}
 		
-		print("Digite alguma coisa para voltar");		
+		println("Digite alguma coisa para voltar");		
 		this.in.next();
 		return;
 	}
@@ -65,10 +65,10 @@ public class PatientView extends View {
 	
 	public AppointmentType selectAppointmentTypes() {
 		while(true) {
-			print("Voce quer ver horários para?");
-			print("1. " + AppointmentType.MEDICAL_APPOINTMENT.getDescription());
-			print("2. " + AppointmentType.COVID_TEST.getDescription());
-			print("3. Voltar");
+			println("Voce quer ver horários para?");
+			println("1. " + AppointmentType.MEDICAL_APPOINTMENT.getDescription());
+			println("2. " + AppointmentType.COVID_TEST.getDescription());
+			println("3. Voltar");
 			
 			int option = in.nextInt();
 			switch(option) {
@@ -76,7 +76,7 @@ public class PatientView extends View {
 				case 2: return AppointmentType.COVID_TEST;
 				case 3: return null;
 				default:
-					print("Opção inválida");
+					println("Opção inválida");
 					break;
 			}
 		}
@@ -84,11 +84,11 @@ public class PatientView extends View {
 	
 	public Doctor chooseDoctor(List<Doctor> doctors) {
 		while(true) {
-			print("Qual médico(a) voce prefere ser atendido?");
+			println("Por qual médico(a) voce prefere ser atendido?");
 			for(int i = 0; i < doctors.size(); i++) {
-				print((i+1) + ". " + doctors.get(i).getName());
+				println((i+1) + ". " + doctors.get(i).getName());
 			}
-			print((doctors.size()+1) + ". Voltar");
+			println((doctors.size()+1) + ". Voltar");
 			
 			int option = in.nextInt();
 			
@@ -105,9 +105,9 @@ public class PatientView extends View {
 	public Date selectAppointmentTime(List<Date> availableDates) {
 		while(true) {
 			for(int i = 0; i < availableDates.size(); i++) {
-				print((i+1) + ". Marcar para " + DateUtils.dateToString(availableDates.get(i)));
+				println((i+1) + ". Marcar para " + DateUtils.dateToString(availableDates.get(i)));
 			}
-			print((availableDates.size() + 1) + ". Voltar");
+			println((availableDates.size() + 1) + ". Voltar");
 			
 			int option = in.nextInt();
 			
@@ -117,12 +117,12 @@ public class PatientView extends View {
 				return availableDates.get(option - 1);
 			}
 			
-			print("Opção inválida");
+			println("Opção inválida");
 		}
 	}
 	
 	public void showAppointmentSuccessfullyScheduled() {
-		print("Consulta marcada com sucesso!");
+		println("Consulta marcada com sucesso!");
 	}
 	
 
