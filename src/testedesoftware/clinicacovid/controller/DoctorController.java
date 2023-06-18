@@ -38,15 +38,13 @@ public class DoctorController {
 			view.showWelcomeMessage(doctor.getName());
 			
 			List<MenuOption> menuOptions = Arrays.asList(DoctorAction.values());		
-			DoctorAction action = (DoctorAction) view.selectMenuOption(menuOptions);				
-			
-			switch(action) {
-				case LOGOUT:
-					return;
-				case SEE_SCHEDULE:
-					this.showScheduledAppointments(doctor.getCalendar());
-					break;
-			}
+			DoctorAction action = (DoctorAction) view.selectMenuOption(menuOptions); 
+				
+			if (action == DoctorAction.SEE_SCHEDULE) {
+				this.showScheduledAppointments(doctor.getCalendar());
+			} else {
+				return;
+			}			
 		}
 	}
 	
