@@ -1,10 +1,12 @@
 package testedesoftware.clinicacovid.dao;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import testedesoftware.clinicacovid.util.HibernateUtil;
 
 public class GenericDao<T> {
@@ -43,6 +45,14 @@ public class GenericDao<T> {
     	T object = em.find(typeParameterClass, id);
     	em.close();
     	return object;
+    }
+    
+    public List<T> findAll() {
+    	EntityManager em = getFactory().createEntityManager();    	
+    	Query q = em.createQuery("select t from " + typeParameterClass.getSimpleName() + " t");
+        List<T> result = (List<T>) q.getResultList();    	
+    	em.close();
+    	return result;
     }
 
 }
