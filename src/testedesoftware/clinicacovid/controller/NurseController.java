@@ -69,7 +69,7 @@ public class NurseController extends ProfessionalController {
 			return;
 		}
 		
-		// TODO: Inicializar EquipmentController		
+		System.out.println("Ainda não é possível fazer a gestão dos equipamentos");
 	}
 	
 	public Storage selectStorage() {

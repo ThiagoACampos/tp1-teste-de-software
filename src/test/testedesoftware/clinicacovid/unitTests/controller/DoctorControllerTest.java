@@ -68,7 +68,6 @@ public class DoctorControllerTest {
 	
 	@Test
 	public void testSeeScheduel_returnNullIfDontSelectDate() {
-		when(view.selectMenuOption(anyList())).thenReturn((MenuOption) DoctorAction.SEE_SCHEDULE).thenReturn(null);
 		when(view.filterDay()).thenReturn(null);
 		Calendar calendar = new Calendar();
 		
@@ -79,7 +78,6 @@ public class DoctorControllerTest {
 	
 	@Test
 	public void testShowAppointmentsEmptyDay() {
-		when(view.selectMenuOption(anyList())).thenReturn((MenuOption) DoctorAction.SEE_SCHEDULE).thenReturn(null);
 		when(view.filterDay()).thenReturn(new Date());
 		Calendar calendar = new Calendar();
 		
@@ -94,7 +92,6 @@ public class DoctorControllerTest {
 		Appointment ap1 = new Appointment(date, new Patient());
 		Appointment ap2 = new Appointment(date, new Patient());		
 		Calendar calendar = new Calendar(Arrays.asList(ap1, ap2));
-		when(view.selectMenuOption(anyList())).thenReturn((MenuOption) DoctorAction.SEE_SCHEDULE).thenReturn(null);
 		when(view.filterDay()).thenReturn(date);
 		
 		List<Appointment> appointments = controller.filterAppointmentsByDay(calendar, view);
