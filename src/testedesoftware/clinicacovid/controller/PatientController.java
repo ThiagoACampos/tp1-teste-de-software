@@ -49,7 +49,7 @@ public class PatientController {
 	}
 	
 	public void newDoctorAppointment(Patient patient) {
-		List<Doctor> doctors = this.doctorController.findAll(); 
+		List<Doctor> doctors = this.doctorController.findAllDoctors(); 
 		Doctor doctor = this.view.chooseDoctor(doctors);
 		
 		List<Date> availableDates = this.appointmentController.getAvailableTimes(new Date(), doctor);		

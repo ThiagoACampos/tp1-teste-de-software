@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import testedesoftware.clinicacovid.enums.DoctorExpertise;
 
@@ -19,11 +21,15 @@ public class Doctor extends User {
 	@Enumerated(EnumType.STRING)
 	private DoctorExpertise expertise;
 	
-    @Transient
-	private List<Appointment> appointments;
+	@OneToMany(mappedBy="doctor", fetch = FetchType.EAGER)
+	private List<DoctorAppointment> appointments;
 	
 	@Transient
 	private Calendar calendar;
+	
+	public Doctor() {
+		
+	}
 	
 	public Doctor(String crm, DoctorExpertise expertise, String name, String username, String password) {
 		super(name, username, password);
@@ -57,7 +63,9 @@ public class Doctor extends User {
 	
 	public Calendar getCalendar() {		
 		if (calendar == null) {			
-			this.calendar = new Calendar(this.appointments);			
+			@SuppressWarnings("unchecked")
+			List<Appointment> appointments = (List<Appointment>) (List<? extends Appointment>) this.appointments;
+			this.calendar = new Calendar(appointments);			
 		}
 		return calendar;
 	}

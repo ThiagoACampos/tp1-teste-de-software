@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class CovidTestAppointment extends Appointment {
 	
 	@ManyToOne
-    @JoinColumn(name="idUser", nullable=false)
+    @JoinColumn(name="idNurse")
 	private Nurse nurse;
 
 	public CovidTestAppointment(Date date, Patient patient, Nurse nurse) {

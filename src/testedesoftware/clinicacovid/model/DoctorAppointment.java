@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class DoctorAppointment extends Appointment {
 	
 	@ManyToOne
-    @JoinColumn(name="idUser", nullable=false)
+    @JoinColumn(name="idDoctor")
 	private Doctor doctor;
 
 	public DoctorAppointment(Date date, Patient patient, Doctor doctor) {
