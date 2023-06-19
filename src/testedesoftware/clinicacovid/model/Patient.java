@@ -1,14 +1,20 @@
 package testedesoftware.clinicacovid.model;
-import java.lang.IllegalArgumentException;
-import java.util.regex.Matcher;
+import java.util.Date;
 import java.util.regex.Pattern;
 
-public class Patient {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import testedesoftware.clinicacovid.util.DateUtils;
+
+
+@Entity
+public class Patient extends User {
 	
-	private String username;
-	private String name;
-	private int age;
+	private Date birthdate;
+	
+	@Column(unique=true)
 	private String email;
+	
 	private String phone;
 	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_%+-]{3,}@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$";
@@ -16,23 +22,25 @@ public class Patient {
 	private static final String PHONE_NUMBER_REGEX = "^[1-9]{2}9?[0-9]{8}$";
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
 	
-	public Patient(String name, int age, String email, String phone, String username) throws Exception {
-		super();
+    public Patient() {
+    	
+    }
+    
+	public Patient(String name, String birthdate, String email, String phone, String username, String password) throws Exception {
+		super(name, username, password);
 		phone = (phone != null) ? phone.replaceAll("[^0-9]", "") : null;
-		this.username = username;
-		this.name = name;
-		this.age = age;
+		this.birthdate = DateUtils.stringToDate(birthdate);
 		this.email = email;
 		this.phone = phone;
-		_validatePatientFields();
+		this.validatePatientFields();
 	}
 
-	private void _validatePatientFields() throws Exception {
+	private void validatePatientFields() throws Exception {
 		if (name == null || name.trim().isEmpty()) {
 			throw new IllegalArgumentException("Name cannot be null, empty nor blank");
 		}
-		if (age < 0) {
-			throw new IllegalArgumentException("Age cannot be negative");
+		if (birthdate.after(new Date())) {
+			throw new IllegalArgumentException("Birthdate cannot in the future");
 		}
 		if (email == null || EMAIL_PATTERN.matcher(email).matches() == false) {
 			throw new IllegalArgumentException("Email is not valid");
@@ -49,10 +57,6 @@ public class Patient {
 		return name;
 	}
 	
-	public int getAge() {
-		return age;
-	}
-	
 	public String getEmail() {
 		return email;
 	}
@@ -63,5 +67,13 @@ public class Patient {
 	
 	public String getUsername() {
 		return username;
+	}
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 }

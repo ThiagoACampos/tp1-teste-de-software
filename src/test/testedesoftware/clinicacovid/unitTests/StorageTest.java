@@ -1,4 +1,4 @@
-package test.testedesoftware.clinicacovid.unitTests;
+package testedesoftware.clinicacovid.unitTests;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package test.testedesoftware.clinicacovid.unitTests;
+package testedesoftware.clinicacovid.unitTests;
 
 import testedesoftware.clinicacovid.model.Equipment;
 import org.junit.jupiter.api.Test;

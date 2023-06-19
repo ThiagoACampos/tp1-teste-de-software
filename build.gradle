@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'eclipse'
     id 'jacoco'
 }
 
@@ -8,13 +9,17 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 sourceSets {
     main {
         java {
             srcDirs = ['src']
-            exclude '**/*Test.java'
-            exclude '**/*Tests.java'
+            exclude 'test/'
+            exclude 'main/'
+        }
+        resources {
+            srcDirs "src/main/resources"
         }
     }
     test {
@@ -26,13 +31,11 @@ sourceSets {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-//    testCompileOnly 'junit:junit:4.12'
-//    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.1'
-
-//    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-//    implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     testCompileOnly 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:3.+'
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.1'
+	implementation 'org.hibernate:hibernate-core:6.2.4.Final'
+    implementation 'mysql:mysql-connector-java:8.0.26'
 }
 
 test {
@@ -59,3 +62,6 @@ jacocoTestReport {
     }
 }
 
+tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+
+apply plugin: "eclipse"

@@ -1,42 +1,40 @@
-package test.testedesoftware.clinicacovid.unitTests;
+package testedesoftware.clinicacovid.unitTests;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Date;
-import java.lang.IllegalArgumentException;
 
 import testedesoftware.clinicacovid.model.Patient;
+import testedesoftware.clinicacovid.util.DateUtils;
 
 public class PatientTest {
 
   private String name;
-  private int age;
+  private String birthdate;
   private String email;
   private String phone;
   private String username;
-
+  private String password;
+  
   @BeforeEach
   void setUp() {
 
     name = "PatientName";
-    age = 18;
+    birthdate = "01/01/2000";
     email = "patient@email.com";
     phone = "3199999-9999";
     username = "patientUsername";
+    password = "TesteDeSoftware123";
   }
 
   @Test
   void testCreatePatitent() throws Exception {
-    Patient patient = new Patient(name, age, email, phone, username);
+    Patient patient = new Patient(name, birthdate, email, phone, username, "");
 
     assertEquals(name, patient.getName());
-    assertEquals(age, patient.getAge());
+    assertEquals(DateUtils.stringToDate(birthdate), patient.getBirthdate());
     assertEquals(email, patient.getEmail());
     assertEquals(phone.replaceAll("[^0-9]", ""), patient.getPhone());
     assertEquals(username, patient.getUsername());
@@ -45,7 +43,7 @@ public class PatientTest {
   @Test
   void testNameEmpty() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient("", age, email, phone, username);
+      new Patient("", birthdate, email, phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
@@ -54,7 +52,7 @@ public class PatientTest {
   @Test
   void testNameNull() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(null, age, email, phone, username);
+      new Patient(null, birthdate, email, phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
@@ -63,25 +61,25 @@ public class PatientTest {
   @Test
   void testNameBlank() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(" ", age, email, phone, username);
+      new Patient(" ", birthdate, email, phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Name cannot be null, empty nor blank");
   }
 
   @Test
-  void testAgeNegative() {
+  void testDateInTheFuture() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, -1, email, phone, username);
+      new Patient(name, "01/01/2200", email, phone, username, password);
     });
 
-    assertEquals(exception.getMessage(), "Age cannot be negative");
+    assertEquals(exception.getMessage(), "Birthdate cannot in the future");
   }
 
   @Test
   void testEmailEmpty() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, "", phone, username);
+      new Patient(name, birthdate, "", phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Email is not valid");
@@ -90,7 +88,7 @@ public class PatientTest {
   @Test
   void testEmailNull() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, null, phone, username);
+      new Patient(name, birthdate, null, phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Email is not valid");
@@ -99,7 +97,7 @@ public class PatientTest {
   @Test
   void testEmailBlank() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, " ", phone, username);
+      new Patient(name, birthdate, " ", phone, username, password);
     });
 
     assertEquals(exception.getMessage(), "Email is not valid");
@@ -108,7 +106,7 @@ public class PatientTest {
   @Test
   void testPhoneEmpty() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, "", username);
+      new Patient(name, birthdate, email, "", username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -117,7 +115,7 @@ public class PatientTest {
   @Test
   void testPhoneNull() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, null, username);
+      new Patient(name, birthdate, email, null, username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -126,7 +124,7 @@ public class PatientTest {
   @Test
   void testPhoneBlank() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, " ", username);
+      new Patient(name, birthdate, email, " ", username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -135,7 +133,7 @@ public class PatientTest {
   @Test
   void testPhoneWithoutDDD() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, "9999-9999", username);
+      new Patient(name, birthdate, email, "9999-9999", username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -144,7 +142,7 @@ public class PatientTest {
   @Test
   void testPhoneWithMoreThanElevenDigits() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, "3199999-99998", username);
+      new Patient(name, birthdate, email, "3199999-99998", username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -153,7 +151,7 @@ public class PatientTest {
   @Test
   void testPhoneWithLessThanTenDigits() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, "319999-999", username);
+      new Patient(name, birthdate, email, "319999-999", username, password);
     });
 
     assertEquals(exception.getMessage(), "Phone number is not valid");
@@ -162,7 +160,7 @@ public class PatientTest {
   @Test
   void testUsernameEmpty() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, phone, "");
+      new Patient(name, birthdate, email, phone, "", password);
     });
 
     assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");
@@ -171,7 +169,7 @@ public class PatientTest {
   @Test
   void testUsernameNull() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, phone, null);
+      new Patient(name, birthdate, email, phone, null, password);
     });
 
     assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");
@@ -180,7 +178,7 @@ public class PatientTest {
   @Test
   void testUsernameBlank() {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new Patient(name, age, email, phone, " ");
+      new Patient(name, birthdate, email, phone, " ", password);
     });
 
     assertEquals(exception.getMessage(), "Username cannot be null, empty nor blank");

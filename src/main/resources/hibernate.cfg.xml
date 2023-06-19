@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clinica-covid</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="show_sql">false</property>
+    	<mapping class="testedesoftware.clinicacovid.model.User" />
+		<mapping class="testedesoftware.clinicacovid.model.Patient" />
+		<mapping class="testedesoftware.clinicacovid.model.Doctor" />
+		<mapping class="testedesoftware.clinicacovid.model.Nurse" />
+		<mapping class="testedesoftware.clinicacovid.model.Appointment" />
+		<mapping class="testedesoftware.clinicacovid.model.CovidTestAppointment" />
+		<mapping class="testedesoftware.clinicacovid.model.DoctorAppointment" />
+		<mapping class="testedesoftware.clinicacovid.model.Equipment" />
+		<mapping class="testedesoftware.clinicacovid.model.Storage" />
+    </session-factory>
+</hibernate-configuration>

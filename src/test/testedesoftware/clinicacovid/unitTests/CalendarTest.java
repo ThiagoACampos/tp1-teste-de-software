@@ -1,4 +1,4 @@
-package test.testedesoftware.clinicacovid.unitTests;
+package testedesoftware.clinicacovid.unitTests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +26,7 @@ public class CalendarTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		calendar = new Calendar();
-		defaultPatient = new Patient("Bernardo", 30, "bernardo@gmail.com", "3199999999", "bernardo");
+		defaultPatient = new Patient("Bernardo", "01/01/2000", "bernardo@gmail.com", "3199999999", "bernardo", "123");
 	}
 	
 	@Test

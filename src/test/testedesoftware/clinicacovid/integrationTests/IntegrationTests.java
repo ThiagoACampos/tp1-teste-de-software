@@ -1,11 +1,8 @@
-package test.testedesoftware.clinicacovid.integrationTests;
+package testedesoftware.clinicacovid.integrationTests;
 
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
-
-import testedesoftware.clinicacovid.model.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +14,22 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.rules.TemporaryFolder;
+
+import testedesoftware.clinicacovid.enums.DoctorExpertise;
+import testedesoftware.clinicacovid.enums.NurseExpertise;
+import testedesoftware.clinicacovid.model.Appointment;
+import testedesoftware.clinicacovid.model.Calendar;
+import testedesoftware.clinicacovid.model.CovidTestAppointment;
+import testedesoftware.clinicacovid.model.Doctor;
+import testedesoftware.clinicacovid.model.DoctorAppointment;
+import testedesoftware.clinicacovid.model.Equipment;
+import testedesoftware.clinicacovid.model.Nurse;
+import testedesoftware.clinicacovid.model.Patient;
+import testedesoftware.clinicacovid.model.Storage;
 
 public class IntegrationTests {
 
@@ -33,8 +43,8 @@ public class IntegrationTests {
 	@BeforeEach
 	protected void dataSetup() throws Exception {
 
-	    patient = new Patient("José",  20, "jose@gmail.com", "31999999999", "jose");
-	    doctor = new Doctor("AB1234", "Roberto", "roberto");
+	    patient = new Patient("José", "01/01/2000", "jose@gmail.com", "31999999999", "jose", "123");
+	    doctor = new Doctor("AB-123456", DoctorExpertise.Cardiologist, "Roberto", "roberto", "123");
 	    storage = new Storage();
 	    storage.setSize(50);
 	    storage.setEquipmentsAllowedToStore(Arrays.asList("Máscara Descartável","Teste Covid","Álcool em gel"));
@@ -52,7 +62,7 @@ public class IntegrationTests {
 
     	// Scheduling Appointment
     	Date scheduleDate = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-08");
-    	DoctorAppointment docAppointment = new DoctorAppointment(doctor, scheduleDate, patient);
+    	DoctorAppointment docAppointment = new DoctorAppointment(scheduleDate, patient, doctor);
     	doctor.getCalendar().getAppointments().add(docAppointment);
 
     	// Canceling Appointment
@@ -69,8 +79,8 @@ public class IntegrationTests {
     	// Scheduling Appointment
     	Date scheduleDateOne = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-08");
     	Date scheduleDateTwo = new SimpleDateFormat("yyyy-MM-dd").parse("2022-07-15");
-    	DoctorAppointment docAppointmentOne = new DoctorAppointment(doctor, scheduleDateOne, patient);
-    	DoctorAppointment docAppointmentTwo = new DoctorAppointment(doctor, scheduleDateTwo, patient);
+    	DoctorAppointment docAppointmentOne = new DoctorAppointment(scheduleDateOne, patient, doctor);
+    	DoctorAppointment docAppointmentTwo = new DoctorAppointment(scheduleDateTwo, patient, doctor);
     	doctor.getCalendar().getAppointments().add(docAppointmentOne);
     	doctor.getCalendar().getAppointments().add(docAppointmentTwo);
 
@@ -86,9 +96,9 @@ public class IntegrationTests {
     void testCovidTestWithoutEquipmentExceptionThrown() throws ParseException, Exception {
 
     	// Scheduling Covid Test Appointment
-    	Nurse nurse = new Nurse("Luana","luana");
+    	Nurse nurse = new Nurse("Luana Silva", "luana.silva", "senha123", "SP/123.456-AE", NurseExpertise.CommunityHealth);
     	Date scheduleDate = new SimpleDateFormat("yyyy-MM-dd").parse("2022-01-15");
-    	CovidTestAppointment covidTestAppointment = new CovidTestAppointment(nurse,scheduleDate,patient);
+    	CovidTestAppointment covidTestAppointment = new CovidTestAppointment(scheduleDate, patient, nurse);
     	doctor.getCalendar().getAppointments().add(covidTestAppointment);
 
     	// Setting Equipment quantity to zero
@@ -117,7 +127,7 @@ public class IntegrationTests {
 
     	// Scheduling Appointment
     	Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2022-10-12");
-        DoctorAppointment docAppointment = new DoctorAppointment(doctor, date, patient);
+        DoctorAppointment docAppointment = new DoctorAppointment(date, patient, doctor);
         doctor.getCalendar().getAppointments().add(docAppointment);
         Appointment newAppointment = doctor.getCalendar().getAppointments().get(0);
 
@@ -130,7 +140,7 @@ public class IntegrationTests {
         assertEquals(1, doctor.getCalendar().getAppointments().size());
         assertTrue(fileToSave.exists());
         assertTrue(fileContent.contains(newAppointment.getPatient().getName()));
-        assertTrue(fileContent.contains(Integer.toString(newAppointment.getPatient().getAge())));
+        assertTrue(fileContent.contains(newAppointment.getPatient().getBirthdate().toString()));
         assertTrue(fileContent.contains(newAppointment.getPatient().getEmail()));
     }
 
