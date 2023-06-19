@@ -44,7 +44,7 @@ public class IntegrationTests {
 	protected void dataSetup() throws Exception {
 
 	    patient = new Patient("José", "01/01/2000", "jose@gmail.com", "31999999999", "jose", "123");
-	    doctor = new Doctor("AB1234", DoctorExpertise.Cardiologist, "Roberto", "roberto", "123");
+	    doctor = new Doctor("AB-123456", DoctorExpertise.Cardiologist, "Roberto", "roberto", "123");
 	    storage = new Storage();
 	    storage.setSize(50);
 	    storage.setEquipmentsAllowedToStore(Arrays.asList("Máscara Descartável","Teste Covid","Álcool em gel"));
