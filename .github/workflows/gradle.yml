@@ -42,7 +42,7 @@ jobs:
     - name: Rodar suite de testes com Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: test    
+        arguments: test --tests testedesoftware.clinicacovid.unitTests.*
         
     - name: Fazer upload do arquivo JAR 
       uses: actions/upload-artifact@v3

@@ -62,4 +62,6 @@ jacocoTestReport {
     }
 }
 
+tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+
 apply plugin: "eclipse"
