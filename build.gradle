@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'eclipse'
+    id 'jacoco'
 }
 
 group 'testedesoftware.clinicacovid'
@@ -40,12 +41,26 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 compileJava.options.encoding = 'ISO-8859-1'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'ISO-8859-1'
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDir = file("$buildDir/jacoco")
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
 }
 
 apply plugin: "eclipse"
