@@ -35,8 +35,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.+'
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.1'
 	implementation 'org.hibernate:hibernate-core:6.2.4.Final'
-    implementation 'mysql:mysql-connector-java:8.0.26'  
-    implementation 'com.sun.jdmk:jmxtools:1.2.1'  
+    implementation 'mysql:mysql-connector-java:8.0.26'
 }
 
 test {
