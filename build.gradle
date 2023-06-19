@@ -62,4 +62,9 @@ jacocoTestReport {
     }
 }
 
+
+jar {
+   duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
 apply plugin: "eclipse"
