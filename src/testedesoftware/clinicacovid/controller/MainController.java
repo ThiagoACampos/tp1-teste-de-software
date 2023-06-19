@@ -30,6 +30,10 @@ public class MainController {
 		while (true) {
 			UserRole role = view.getUserRole();
 			
+			if (role == null) {
+				return;
+			}
+			
 			User user = loginController.handleLogin();
 			if (user == null) {
 				continue;

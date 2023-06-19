@@ -14,9 +14,13 @@ public class SelectModeView extends View {
 				println((i + 1 ) + ": " + roleList[i].getDescription());
 			}
 			
-			print("Digite a opção: ");
+			print("Digite a opção ('0' para encerrar): ");
 			
 			int option = in.nextInt();
+			
+			if (option == 0) {
+				return null;
+			}
 			
 			if (option >= 1 && option <= roleList.length) {
 				return roleList[option - 1];
