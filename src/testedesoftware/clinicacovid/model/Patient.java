@@ -2,6 +2,7 @@ package testedesoftware.clinicacovid.model;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import testedesoftware.clinicacovid.util.DateUtils;
 
@@ -10,7 +11,10 @@ import testedesoftware.clinicacovid.util.DateUtils;
 public class Patient extends User {
 	
 	private Date birthdate;
+	
+	@Column(unique=true)
 	private String email;
+	
 	private String phone;
 	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_%+-]{3,}@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$";

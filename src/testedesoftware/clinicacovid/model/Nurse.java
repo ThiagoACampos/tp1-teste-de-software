@@ -2,6 +2,7 @@ package testedesoftware.clinicacovid.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +14,7 @@ import testedesoftware.clinicacovid.enums.NurseExpertise;
 @Entity
 public class Nurse extends User {
 
+	@Column(unique=true)
 	private String coren;
 	
 	@Enumerated(EnumType.STRING)

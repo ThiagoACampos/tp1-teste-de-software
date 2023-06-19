@@ -1,5 +1,6 @@
 package testedesoftware.clinicacovid.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class User {
 		
 	protected String name;
 	
+	@Column(unique=true)
 	protected String username;
 	
 	protected String password;

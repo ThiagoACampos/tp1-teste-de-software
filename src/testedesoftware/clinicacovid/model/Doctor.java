@@ -2,6 +2,7 @@ package testedesoftware.clinicacovid.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,6 +17,7 @@ public class Doctor extends User {
 	
 	private static final String CRM_REGEX = "^[A-Z]{2}-\\d{6}$";
 	
+	@Column(unique=true)
 	private String crm;
 	
 	@Enumerated(EnumType.STRING)
