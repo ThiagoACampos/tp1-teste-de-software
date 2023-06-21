@@ -18,4 +18,29 @@ O sistema não possui interface gráfica, mas é exibido um menu para o usuário
 
 ### Explicação das Tecnologias Utilizadas
 
-Para a construção do sistema, utilizou-se a linguagem Java.
+O sistema foi construindo em [Java]('https://www.java.com') e utiliza um banco de dados [MySQL]('https://www.mysql.com/'). Para realizar a conexão com o banco de dados, utilizamos o ORM [Hibernate]('https://hibernate.org/'). Para a criação de testes, usamos os frameworks [JUnit]('https://junit.org/') e [Mockito]('https://site.mockito.org/'). Por fim, utilizamos o [Gradle]('https://gradle.org/') para automatizar os builds
+
+### Como rodar a aplicação
+
+#### 1. Importar o projeto na IDE de sua preferência (Ex.: Eclipse, IntelliJ, etc).
+
+Obs.: Caso você esteja usando o Eclipse e a IDE não reconheça e instale as dependência automaticamente, pode ser necessário executar o comando abaixo:
+
+```bash
+$ ./gradlew cleanEclipse eclipse
+```
+
+#### 2. Inicializar o banco de dados
+
+Utilizamos o [Docker]('https://www.docker.com/') para criar o banco de dados local. Primeiramente, você deve criar uma imagem com o seguinte comando
+
+
+```bash
+$ sudo docker build -t clinica-covid-db .
+```
+
+Por fim, falta inicializar o container:
+
+```bash
+$ docker-compose up
+```Para a construção do sistema, utilizou-se a linguagem Java.
