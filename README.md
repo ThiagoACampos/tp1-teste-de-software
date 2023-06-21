@@ -43,4 +43,4 @@ Por fim, falta inicializar o container:
 
 ```bash
 $ docker-compose up
-```Para a construção do sistema, utilizou-se a linguagem Java.
+```
